@@ -1,0 +1,1717 @@
+# Казахстан
+ALA=Алматы
+NQZ=Астана
+CIT=Шымкент
+GUW=Атырау
+AKX=Актобе
+SCO=Актау
+URA=Уральск
+PWQ=Павлодар
+KZO=Кызылорда
+UKK=Усть-Каменогорск
+KGF=Қарағанды
+TDK=Талдыкорган
+EKB=Экибастуз
+PLX=Семей
+DZN=Жезқазған
+HSA=Туркестан
+BXH=Балхаш
+
+
+
+# Россия
+SVO=Москва (Шереметьево)
+DME=Москва (Домодедово)
+VKO=Москва (Внуково)
+ZIA=Москва (Жуковский)
+LED=Санкт-Петербург
+AER=Сочи
+KRR=Краснодар
+ROV=Ростов-на-Дону
+MRV=Минеральные Воды
+AAQ=Анапа
+ASF=Астрахань
+UFA=Уфа
+KZN=Казань
+SVX=Екатеринбург
+OVB=Новосибирск
+KJA=Красноярск
+IKT=Иркутск
+VVO=Владивосток
+HTA=Чита
+UUS=Южно-Сахалинск
+PKC=Петропавловск-Камчатский
+YKS=Якутск
+GDX=Магадан
+CEK=Челябинск
+OMS=Омск
+TOF=Томск
+BAX=Барнаул
+KEJ=Кемерово
+NSK=Норильск
+TJM=Тюмень
+SGC=Сургут
+NYM=Надым
+PEE=Пермь
+GOJ=Нижний Новгород
+KUF=Самара
+REN=Оренбург
+VOG=Волгоград
+VOZ=Воронеж
+
+# Узбекистан
+TAS=Ташкент
+SKD=Самарканд
+BHK=Бухара
+FEG=Фергана
+OSS=Ош (Кыргызстан — рядом)
+NVI=Навои
+NCU=Нукус
+KSQ=Карши
+TMZ=Термез
+UGC=Ургенч
+
+# Кыргызстан
+FRU=Бишкек (Манас)
+OSS=Ош
+
+# Китай
+PEK=Пекин (Столичный)
+PKX=Пекин (Дасин)
+PVG=Шанхай (Пудун)
+SHA=Шанхай (Хунцяо)
+CAN=Гуанчжоу
+SZX=Шэньчжэнь
+CTU=Чэнду
+CKG=Чунцин
+XIY=Сиань
+WUH=Ухань
+KMG=Куньмин
+HGH=Ханчжоу
+NKG=Нанкин
+XMN=Сямэнь
+TAO=Циндао
+DLC=Далянь
+SHE=Шэньян
+HRB=Харбин
+CGO=Чжэнчжоу
+CSX=Чанша
+NNG=Наньнин
+KWL=Гуйлинь
+LHW=Ланьчжоу
+URC=Урумчи
+HET=Хух-Хото
+TNA=Цзинань
+FOC=Фучжоу
+HAK=Хайкоу
+SYX=Санья
+TYN=Тайюань
+KHN=Наньчан
+WNZ=Вэньчжоу
+NGB=Нинбо
+
+
+# Азербайджан
+GYD=Баку (Гейдар Алиев)
+LEN=Ленкорань
+NAJ=Нахчыван
+GBB=Габала
+
+# Армения
+EVN=Ереван (Звартноц)
+LWN=Гюмри
+
+# Грузия
+TBS=Тбилиси
+BUS=Батуми
+KUT=Кутаиси
+
+# Туркменистан
+ASB=Ашхабад
+MYP=Мары
+CRZ=Туркменабат
+TAZ=Дашогуз
+
+
+# Таджикистан
+DYU=Душанбе
+LBD=Худжанд
+KQT=Курган-Тюбе
+
+# Беларусь
+MSQ=Минск (Национальный)
+GME=Гомель
+VTB=Витебск
+
+# Украина
+KBP=Киев (Борисполь)
+IEV=Киев (Жуляны)
+LWO=Львов
+ODS=Одесса
+HRK=Харьков
+DNK=Днепр
+
+# Молдова
+KIV=Кишинёв
+
+# Латвия
+RIX=Рига
+
+# Литва
+VNO=Вильнюс
+PLQ=Паланга
+KUN=Каунас
+
+# Эстония
+TLL=Таллин
+
+
+# Германия
+FRA=Франкфурт-на-Майне (Франкфурт)
+MUC=Мюнхен (Франц-Йозеф Штраус)
+BER=Берлин (Бранденбург)
+HAM=Гамбург
+DUS=Дюссельдорф
+CGN=Кёльн (Кёльн-Бонн)
+STR=Штутгарт
+NUE=Нюрнберг
+HAJ=Ганновер
+LEJ=Лейпциг
+DRS=Дрезден
+FKB=Карлсруэ
+SCN=Саарбрюккен
+ERF=Эрфурт
+FMO=Мюнстер
+
+
+# Великобритания
+LHR=Лондон (Хитроу)
+LGW=Лондон (Гатвик)
+STN=Лондон (Станстед)
+LTN=Лондон (Лутон)
+LCY=Лондон (Сити)
+MAN=Манчестер
+BHX=Бирмингем
+EDI=Эдинбург
+GLA=Глазго
+BRS=Бристоль
+LBA=Лидс
+NCL=Ньюкасл
+BFS=Белфаст (Международный)
+ORK=Корк
+DUB=Дублин
+
+
+# Франция
+CDG=Париж (Шарль-де-Голль)
+ORY=Париж (Орли)
+NCE=Ницца
+MRS=Марсель
+LYS=Лион
+TLS=Тулуза
+BOD=Бордо
+NTE=Нант
+LIL=Лилль
+MPL=Монпелье
+SXB=Страсбург
+BIQ=Биарриц
+CFE=Клермон-Ферран
+RNS=Ренн
+
+
+# Италия
+FCO=Рим (Фьюмичино)
+CIA=Рим (Чампино)
+MXP=Милан (Мальпенса)
+LIN=Милан (Линате)
+BGY=Милан (Бергамо)
+VCE=Венеция
+NAP=Неаполь
+BLQ=Болонья
+FLR=Флоренция
+PSA=Пиза
+CTA=Катания
+PMO=Палермо
+BRI=Бари
+CAG=Кальяри
+OLB=Ольбия
+TRN=Турин
+VRN=Верона
+
+# Испания
+MAD=Мадрид
+BCN=Барселона
+AGP=Малага
+ALC=Аликанте
+PMI=Пальма-де-Майорка
+VLC=Валенсия
+SVQ=Севилья
+BIO=Бильбао
+TFS=Тенерифе (Юг)
+TFN=Тенерифе (Север)
+LPA=Лас-Пальмас (Гран-Канария)
+ACE=Лансароте
+FUE=Фуэртевентура
+IBZ=Ибица
+MAH=Маон (Менорка)
+SDR=Сантандер
+ZAZ=Сарагоса
+GRX=Гранада
+
+# Португалия
+LIS=Лиссабон
+OPO=Порту
+FAO=Фару
+FNC=Фуншал (Мадейра)
+PDL=Понта-Делгада (Азоры)
+TER=Терсейра (Азоры)
+
+
+# Нидерланды
+AMS=Амстердам (Схипхол)
+EIN=Эйндховен
+RTM=Роттердам
+MST=Маастрихт
+
+# Бельгия
+BRU=Брюссель
+CRL=Брюссель (Шарлеруа)
+LGG=Льеж
+ANR=Антверпен
+
+# Швейцария
+ZRH=Цюрих
+GVA=Женева
+BSL=Базель
+BRN=Берн
+LUZ=Люцерн
+
+# Австрия
+VIE=Вена
+GRZ=Грац
+INN=Инсбрук
+SZG=Зальцбург
+LNZ=Линц
+KLU=Клагенфурт
+
+# Чехия
+PRG=Прага
+BRQ=Брно
+OSR=Острава
+
+# Словакия
+BTS=Братислава
+KSC=Кошице
+
+# Венгрия
+BUD=Будапешт
+DEB=Дебрецен
+
+# Польша
+WAW=Варшава
+KRK=Краков
+GDN=Гданьск
+WRO=Вроцлав
+POZ=Познань
+KTW=Катовице
+LCJ=Лодзь
+RZE=Жешув
+
+# Румыния
+OTP=Бухарест (Отопень)
+BBU=Бухарест (Бэняса)
+CLJ=Клуж-Напока
+TSR=Тимишоара
+IAS=Яссы
+SBZ=Сибиу
+CND=Констанца
+
+
+# Болгария
+SOF=София
+VAR=Варна
+BOJ=Бургас
+PDV=Пловдив
+
+# Греция
+ATH=Афины
+SKG=Салоники
+HER=Ираклион (Крит)
+RHO=Родос
+CFU=Корфу
+KGS=Кос
+JMK=Миконос
+JTR=Санторини
+ZTH=Закинф
+PVK=Превеза
+KLX=Калаврита
+CHQ=Ханья (Крит)
+
+# Турция
+IST=Стамбул (Аэропорт Стамбул)
+SAW=Стамбул (Сабиха Гёкчен)
+AYT=Анталья
+ESB=Анкара
+ADB=Измир
+DLM=Даламан
+BJV=Бодрум
+GZT=Газиантеп
+TZX=Трабзон
+ERZ=Эрзурум
+VAN=Ван
+DIY=Диярбакыр
+KYA=Конья
+SZF=Самсун
+MLX=Малатья
+ASR=Кайсери
+GZP=Алания (Газипаша)
+
+# Скандинавия
+ARN=Стокгольм (Арланда)
+NYO=Стокгольм (Скавста)
+GOT=Гётеборг
+MMX=Мальмё
+OSL=Осло (Гардермун)
+TRF=Осло (Торп)
+BGO=Берген
+TRD=Тронхейм
+CPH=Копенгаген
+BLL=Биллунд
+AAL=Ольборг
+HEL=Хельсинки
+TMP=Тампере
+TKU=Турку
+OUL=Оулу
+RVN=Рованиеми
+REK=Рейкьявик
+KEF=Рейкьявик (Кефлавик)
+
+
+# Балтика (уже есть выше — пропускаем)
+
+# Финляндия — уже выше
+
+# Ирландия — уже выше (DUB)
+
+# Люксембург
+LUX=Люксембург
+
+# Мальта
+MLA=Мальта
+
+# Кипр
+LCA=Ларнака
+PFO=Пафос
+ECN=Эрджан (Северный Кипр)
+
+
+# Хорватия
+ZAG=Загреб
+SPU=Сплит
+DBV=Дубровник
+ZAD=Задар
+PUY=Пула
+RJK=Риека
+
+# Словения
+LJU=Любляна
+MBX=Марибор
+
+# Сербия
+BEG=Белград
+INI=Ниш
+
+# Босния и Герцеговина
+SJJ=Сараево
+BNX=Баня-Лука
+
+# Черногория
+TGD=Подгорица
+TIV=Тиват
+
+# Северная Македония
+SKP=Скопье
+OHD=Охрид
+
+
+# Албания
+TIA=Тирана
+
+# Косово
+PRN=Приштина
+
+# Молдова — уже выше (KIV)
+
+# Беларусь — уже выше
+
+# Украина — уже выше
+# США
+JFK=Нью-Йорк (JFK)
+EWR=Нью-Йорк (Ньюарк)
+LGA=Нью-Йорк (Ла-Гуардия)
+LAX=Лос-Анджелес
+ORD=Чикаго (О'Хара)
+MDW=Чикаго (Мидуэй)
+ATL=Атланта
+DFW=Даллас (Форт-Уэрт)
+DAL=Даллас (Лав-Филд)
+DEN=Денвер
+SFO=Сан-Франциско
+OAK=Окленд
+SJC=Сан-Хосе
+MIA=Майами
+FLL=Форт-Лодердейл
+MCO=Орландо
+TPA=Тампа
+IAD=Вашингтон (Даллес)
+DCA=Вашингтон (Рейган)
+BWI=Балтимор
+BOS=Бостон
+PHL=Филадельфия
+CLT=Шарлотт
+SEA=Сиэтл
+LAS=Лас-Вегас
+PHX=Финикс
+IAH=Хьюстон (Буш)
+HOU=Хьюстон (Хобби)
+MSP=Миннеаполис
+DTW=Детройт
+PIT=Питтсбург
+CLE=Кливленд
+CMH=Колумбус
+IND=Индианаполис
+MKE=Милуоки
+STL=Сент-Луис
+MCI=Канзас-Сити
+MSY=Новый Орлеан
+MEM=Мемфис
+BNA=Нашвилл
+RDU=Роли-Дарем
+ORF=Норфолк
+RIC=Ричмонд
+SAN=Сан-Диего
+PDX=Портленд
+SLC=Солт-Лейк-Сити
+ABQ=Альбукерке
+TUC=Тусон
+OMA=Омаха
+BUF=Буффало
+SYR=Сиракьюс
+ALB=Олбани
+BDL=Хартфорд
+PWM=Портленд (Мэн)
+BTV=Берлингтон
+MHT=Манчестер
+PVD=Провиденс
+HNL=Гонолулу (Гавайи)
+OGG=Мауи (Гавайи)
+KOA=Кона (Гавайи)
+LIH=Кауаи (Гавайи)
+ANC=Анкоридж (Аляска)
+FAI=Фэрбанкс (Аляска)
+JNU=Джуно (Аляска)
+
+
+# Канада
+YYZ=Торонто (Пирсон)
+YTZ=Торонто (Билли Бишоп)
+YVR=Ванкувер
+YUL=Монреаль (Трюдо)
+YYC=Калгари
+YEG=Эдмонтон
+YOW=Оттава
+YHZ=Галифакс
+YWG=Виннипег
+YQB=Квебек
+YXE=Саскатун
+YQR=Реджайна
+YYJ=Виктория
+YKF=Китченер-Ватерлоо
+YHM=Гамильтон
+YLW=Келоуна
+YXU=Лондон (Онтарио)
+YQT=Тандер-Бэй
+YSB=Садбери
+YGK=Кингстон
+YFC=Фредериктон
+YSJ=Сент-Джон
+YYT=Сент-Джонс (Ньюфаундленд)
+YYG=Шарлоттаун
+YDF=Дир-Лейк
+YQM=Монктон
+YZF=Йеллоунайф
+YXY=Уайтхорс
+YFB=Икалуит
+
+
+# Мексика
+MEX=Мехико
+CUN=Канкун
+GDL=Гвадалахара
+MTY=Монтеррей
+TIJ=Тихуана
+SJD=Лос-Кабос
+PVR=Пуэрто-Вальярта
+MZT=Масатлан
+HMO=Эрмосильо
+CJS=Сьюдад-Хуарес
+AGU=Агуаскальентес
+BJX=Леон (Гуанахуато)
+SLP=Сан-Луис-Потоси
+VER=Веракрус
+MID=Мерида
+OAX=Оахака
+TAP=Тапачула
+VSA=Вильяэрмоса
+CZM=Косумель
+HUX=Уатулько
+ZIH=Сихуатанехо
+ZLO=Мансанильо
+LAP=Ла-Пас
+MXL=Мехикали
+CUL=Кулиакан
+DGO=Дуранго
+CUU=Чиуауа
+MON=Морелия
+PBC=Пуэбла
+QRO=Керетаро
+REX=Рейноса
+TAM=Тампико
+TRC=Торреон
+ZCL=Сакатекас
+
+# Бразилия
+GRU=Сан-Паулу (Гуарульос)
+CGH=Сан-Паулу (Конгоньяс)
+VCP=Сан-Паулу (Кампинас)
+GIG=Рио-де-Жанейро (Гaleão)
+SDU=Рио-де-Жанейро (Сантос-Дюмон)
+BSB=Бразилиа
+SSA=Сальвадор
+REC=Ресифи
+FOR=Форталеза
+BEL=Белен
+MAO=Манаус
+CWB=Куритиба
+POA=Порту-Алегри
+FLN=Флорианополис
+NAT=Натал
+MCZ=Масейо
+JPA=Жоау-Песоа
+AJU=Аракажу
+THE=Терезина
+SLZ=Сан-Луис
+CGR=Кампу-Гранди
+CGB=Куяба
+PVH=Порту-Велью
+RBR=Риу-Бранку
+MCP=Макапа
+BOA=Боависта
+
+# Аргентина
+EZE=Буэнос-Айрес (Эсейса)
+AEP=Буэнос-Айрес (Аэропарк)
+COR=Кордова
+MDZ=Мендоса
+ROS=Росарио
+BRC=Барилоче
+USH=Ушуая
+IGR=Игуасу
+SLA=Сальта
+JUJ=Жужуй
+NQN=Неукен
+REL=Пуэрто-Мадрин
+PMY=Пуэрто-Мадрин
+FTE=Эль-Калафате
+TUC=Тукуман
+RSA=Санта-Роса
+
+# Чили
+SCL=Сантьяго
+IQQ=Икике
+ANF=Антофагаста
+CCP=Консепсьон
+PMC=Пуэрто-Монт
+PUQ=Пунта-Аренас
+LSC=Ла-Серена
+ZCO=Темуко
+ZOS=Ослуе
+IPC=Остров Пасхи
+
+# Колумбия
+BOG=Богота
+MDE=Медельин
+CLO=Кали
+CTG=Картахена
+BAQ=Барранкилья
+SMR=Санта-Марта
+ADZ=Сан-Андрес
+PEI=Перейра
+BGA=Букараманга
+EOH=Медельин (Энрике Олайя)
+
+# Перу
+LIM=Лима
+CUZ=Куско
+AQP=Арекипа
+IQT=Икитос
+TRU=Трухильо
+PIU=Пьюра
+JUL=Хулиака
+CIX=Чиклайо
+
+# Венесуэла
+CCS=Каракас
+MAR=Маракайбо
+VLN=Валенсия
+BRM=Баркисимето
+PMV=Маргарита
+
+# Эквадор
+UIO=Кито
+GYE=Гуаякиль
+GPS=Галапагос
+
+# Боливия
+LPB=Ла-Пас
+VVI=Санта-Крус
+CBB=Кочабамба
+SRE=Сукре
+
+# Парагвай
+ASU=Асунсьон
+
+# Уругвай
+MVD=Монтевидео
+
+# Куба
+HAV=Гавана
+VRA=Варадеро
+HOG=Ольгин
+SCU=Сантьяго-де-Куба
+
+# Доминиканская Республика
+SDQ=Санто-Доминго
+PUJ=Пунта-Кана
+STI=Сантьяго
+
+# Панама
+PTY=Панама
+
+# Коста-Рика
+SJO=Сан-Хосе
+
+# Гватемала
+GUA=Гватемала
+
+# Гондурас
+TGU=Тегусигальпа
+SAP=Сан-Педро-Сула
+
+# Сальвадор
+SAL=Сан-Сальвадор
+
+# Никарагуа
+MGA=Манагуа
+
+# Ямайка
+KIN=Кингстон
+MBJ=Монтего-Бей
+
+# Багамы
+NAS=Нассау
+
+# Барбадос
+BGI=Бриджтаун
+
+# Тринидад и Тобаго
+POS=Порт-оф-Спейн
+
+# Гаити
+PAP=Порт-о-Пренс
+
+# Пуэрто-Рико
+SJU=Сан-Хуан
+
+# Япония
+NRT=Токио (Нарита)
+HND=Токио (Ханеда)
+KIX=Осака (Кансай)
+ITM=Осака (Итами)
+NGO=Нагоя
+CTS=Саппоро
+FUK=Фукуока
+OKA=Окинава
+HIJ=Хиросима
+KOJ=Кагосима
+KMJ=Кумамото
+NGS=Нагасаки
+OIT=Оита
+MYJ=Мацуяма
+TAK=Такаматsu
+TKS=Токусима
+KCZ=Кochi
+AOJ=Аомори
+SDJ=Сендай
+AXT=Акита
+GAJ=Ямагата
+FKS=Фукусима
+KIJ=Ниигата
+TOY=Тояма
+KMQ=Коматсу
+OKJ=Окаяма
+
+# Южная Корея
+ICN=Сеул (Инчхон)
+GMP=Сеул (Кимпо)
+PUS=Пусан
+CJU=Чеджу
+TAE=Тэгу
+CJJ=Чхонджу
+RSU=Йосу
+KWJ=Кванджу
+WJU=Вонджу
+YNY=Янъян
+
+# Северная Корея
+FNJ=Пхеньян
+
+# Монголия
+ULN=Улан-Батор
+
+# Индия
+DEL=Дели
+BOM=Мумбаи
+BLR=Бангалор
+MAA=Ченнаи
+HYD=Хайдарабад
+CCU=Калькутта
+AMD=Ахмедабад
+GOI=Гоа
+COK=Кочин
+TRV=Тируванантапурам
+PNQ=Пуне
+NAG=Нагпур
+JAI=Джайпур
+LKO=Лакхнау
+PAT=Патна
+BBI=Бхубанешвар
+GAU=Гувахати
+IXB=Багдогра
+VNS=Варанаси
+ATQ=Амритсар
+IXC=Чандигарх
+SXR=Сринагар
+IXL=Лех
+UDR=Удайпур
+JDH=Джодхпур
+IXZ=Порт-Блэр
+
+# Пакистан
+KHI=Карачи
+LHE=Лахор
+ISB=Исламабад
+PEW=Пешавар
+MUX=Мултан
+SKZ=Суккур
+LYP=Фейсалабад
+UET=Кветта
+
+# Бангладеш
+DAC=Дакка
+CGP=Читтагонг
+ZYL=Силхет
+
+# Шри-Ланка
+CMB=Коломбо
+HRI=Хамбантота
+
+# Непал
+KTM=Катманду
+PKR=Покхара
+BIR=Биратнагар
+
+# Мальдивы
+MLE=Мале
+GAN=Адду Атолл
+
+# Мьянма
+RGN=Янгон
+MDL=Мандалай
+
+# Таиланд
+BKK=Бангкок (Суварнабхуми)
+DMK=Бангкок (Дон Мыанг)
+HKT=Пхукет
+CNX=Чиангмай
+USM=Самуи
+UTP=Паттайя
+HDY=Хат-Яй
+CEI=Чианграй
+
+# Вьетнам
+SGN=Хошимин
+HAN=Ханой
+DAD=Дананг
+CXR=Нячанг
+PQC=Фукуок
+VII=Винь
+HUI=Хюэ
+UIH=Куинён
+
+# Камбоджа
+PNH=Пномпень
+REP=Сиемреап
+
+# Лаос
+VTE=Вьентьян
+LPQ=Луанг-Прабанг
+
+# Малайзия
+KUL=Куала-Лумпур (KLIA)
+SZB=Куала-Лумпур (Субанг)
+PEN=Пенанг
+BKI=Кота-Кинабалу
+KCH=Кучинг
+LGK=Лангкави
+JHB=Джохор-Бару
+AOR=Алор-Сетар
+IPH=Ипох
+MYY=Мири
+SDK=Сандакан
+
+# Сингапур
+SIN=Сингапур
+
+# Индонезия
+CGK=Джакарта
+DPS=Бали (Денпасар)
+SUB=Сурабая
+UPG=Макассар
+MDC=Манадо
+PLM=Палембанг
+PKU=Пеканбару
+BTH=Батам
+BPN=Баликпапан
+SRG=Семаранг
+JOG=Джокьякарта
+SOC=Суракарта
+LOP=Ломбок
+KOE=Купанг
+AMQ=Амбон
+TIM=Тимика
+DJJ=Джаяпура
+
+# Филиппины
+MNL=Манила
+CEB=Себу
+DVO=Давао
+ILO=Илоило
+BCD=Баколод
+KLO=Калибо
+MPH=Катиклан (Боракай)
+ZAM=Замбоанга
+GEN=Генерал-Сантос
+PPS=Пуэрто-Принсеса
+
+# Бруней
+BWN=Бандар-Сери-Бегаван
+
+# Восточный Тимор
+DIL=Дили
+
+# Папуа Новая Гвинея
+POM=Порт-Морсби
+
+# Гонконг
+HKG=Гонконг
+
+# Макао
+MFM=Макао
+
+# Тайвань
+TPE=Тайпей (Таоюань)
+TSA=Тайпей (Сунshan)
+KHH=Гаосюн
+RMQ=Тайчжун
+TNN=Тайнань
+TTT=Тайтун
+
+# Афганистан
+KBL=Кабул
+KDH=Кандагар
+HEA=Герат
+MZR=Мазари-Шариф
+
+# Иран
+IKA=Тегеран (Имам Хомейни)
+THR=Тегеран (Мехрабад)
+MHD=Мешхед
+SYZ=Шираз
+IFN=Исфахан
+TBZ=Тебриз
+AHZ=Ахваз
+KER=Керман
+BND=Бендер-Аббас
+AWZ=Ахваз
+
+# Ирак
+BGW=Багдад
+BSR=Басра
+EBL=Эрбиль
+NJF=Наджаф
+ISU=Сулеймания
+
+# Сирия
+DAM=Дамаск
+ALP=Алеппо
+LTK=Латакия
+
+# Ливан
+BEY=Бейрут
+
+# Иордания
+AMM=Амман
+AQJ=Акаба
+
+# Израиль
+TLV=Тель-Авив
+ETH=Эйлат
+
+# Палестина
+VDA=Овда
+
+# Йемен
+SAH=Сана
+ADE=Аден
+
+# Оман
+MCT=Маскат
+SLL=Салала
+DQM=Дукм
+
+# ОАЭ
+DXB=Дубай
+AUH=Абу-Даби
+SHJ=Шарджа
+RKT=Рас-эль-Хайма
+FJR=Фуджейра
+AAN=Аль-Айн
+
+# Катар
+DOH=Доха
+
+# Кувейт
+KWI=Кувейт
+
+# Бахрейн
+BAH=Бахрейн
+
+# Саудовская Аравия
+RUH=Эр-Рияд
+JED=Джидда
+MED=Медина
+DMM=Даммам
+AHB=Абха
+TIF=Таиф
+HOF=Эль-Хуфуф
+GIZ=Джизан
+EAM=Наджран
+RAE=Арар
+TUU=Табук
+URY=Гурайят
+ELQ=Бурайда
+
+# Армения — уже выше
+
+# Грузия — уже выше
+
+# Азербайджан — уже выше
+
+# Кипр — уже выше
+
+
+# Египет
+CAI=Каир
+HRG=Хургада
+SSH=Шарм-эль-Шейх
+LXR=Луксор
+ASW=Асуан
+ABS=Абу-Симбел
+MUH=Мерса-Матрух
+TCP=Таба
+RMF=Марса-Алам
+
+# Марокко
+CMN=Касабланка
+RAK=Марракеш
+FEZ=Фес
+TNG=Танжер
+OUD=Уджда
+AGA=Агадир
+NDR=Надор
+RBA=Рабат
+TTA=Тан-Тан
+ERH=Эр-Рашидия
+
+# Тунис
+TUN=Тунис
+MIR=Монастир
+DJE=Джерба
+TOE=Тозер
+SFA=Сфакс
+
+# Алжир
+ALG=Алжир
+ORN=Оран
+AAE=Аннаба
+CZL=Константина
+TLM=Тлемсен
+TMR=Тамангассет
+GJL=Джиджель
+
+# Ливия
+TIP=Триполи
+BEN=Бенгази
+SEB=Себха
+
+# Судан
+KRT=Хартум
+PZU=Порт-Судан
+
+# Эфиопия
+ADD=Аддис-Абеба
+DIR=Дире-Дауа
+JIM=Джимма
+MQX=Мекеле
+BJR=Бахир-Дар
+GDQ=Гондэр
+AWA=Авасса
+
+# Кения
+NBO=Найроби (Джомо Кениата)
+WIL=Найроби (Уилсон)
+MBA=Момбаса
+KIS=Кисуму
+EDL=Элдорет
+
+# Танзания
+DAR=Дар-эс-Салам
+ZNZ=Занзибар
+JRO=Килиманджаро
+MWZ=Мванза
+ARK=Аруша
+
+# Уганда
+EBB=Кампала
+
+# Руанда
+KGL=Кигали
+
+# Бурунди
+BJM=Бужумбура
+
+# Замбия
+LUN=Лусака
+NLA=Ндола
+LVI=Ливингстон
+
+# Зимбабве
+HRE=Хараре
+BUQ=Булавайо
+VFA=Виктория-Фолс
+
+# Мозамбик
+MPM=Мапуту
+BEW=Бейра
+NLA=Нампула
+
+# Малави
+LLW=Лилонгве
+BLZ=Блантайр
+
+# Мадагаскар
+TNR=Антананариву
+MJN=Маджунга
+DIE=Диего-Суарес
+TMM=Таматаве
+
+# Маврикий
+MRU=Маврикий
+
+# Реюньон
+RUN=Реюньон
+
+# Сейшелы
+SEZ=Сейшелы
+
+# Южная Африка
+JNB=Йоханнесбург
+CPT=Кейптаун
+DUR=Дурбан
+PLZ=Порт-Элизабет
+BFN=Блумфонтейн
+ELS=Ист-Лондон
+GRJ=Джордж
+MQP=Крюгер (Мпумаланга)
+
+# Намибия
+WDH=Виндхук
+SWP=Свакопмунд
+
+# Ботсвана
+GBE=Габороне
+MUB=Маун
+BBK=Касане
+
+# Ангола
+LAD=Луанда
+
+# Конго (ДРК)
+FIH=Киншаса
+FKI=Кисангани
+FBM=Лубумбаши
+
+# Конго (Республика)
+BZV=Браззавиль
+PNR=Пуэнт-Нуар
+
+# Камерун
+DLA=Дуала
+NSI=Яунде
+
+# Нигерия
+LOS=Лагос
+ABV=Абуджа
+KAN=Кано
+PHC=Порт-Харкорт
+ENU=Энугу
+
+# Гана
+ACC=Аккра
+KMS=Кумаси
+
+# Кот-д'Ивуар
+ABJ=Абиджан
+
+# Сенегал
+DKR=Дакар
+
+# Мали
+BKO=Бамако
+
+# Буркина-Фасо
+OUA=Уагадугу
+
+# Нигер
+NIM=Ниамей
+
+# Чад
+NDJ=Нджамена
+
+# Эфиопия — уже выше
+
+# Сомали
+MGQ=Могадишо
+
+# Джибути
+JIB=Джибути
+
+# Эритрея
+ASM=Асмэра
+
+# Габон
+LBV=Либревиль
+
+# Экваториальная Гвинея
+SSG=Малабо
+
+# Сьерра-Леоне
+FNA=Фритаун
+
+# Либерия
+ROB=Монровия
+
+# Гвинея
+CKY=Конакри
+
+# Гамбия
+BJL=Банжул
+
+# Кабо-Верде
+SID=Салью (Сал)
+RAI=Прая
+
+# Мавритания
+NKC=Нуакшот
+
+# Бенин
+COO=Котону
+
+# Того
+LFW=Ломе
+
+# Замбия — уже выше
+
+# Эсватини
+SHO=Мбабане
+
+# Лесото
+MSU=Масеру
+
+# Ливия — уже выше
+
+# Австралия и Океания
+SYD=Сидней
+MEL=Мельбурн
+BNE=Брисбен
+PER=Перт
+ADL=Аделаида
+CBR=Канберра
+OOL=Голд-Кост
+CNS=Кэрнс
+DRW=Дарвин
+TSV=Таунсвилл
+MKY=Маккай
+ROK=Рокхэмптон
+HBA=Хобарт
+LST=Лонсестон
+ASP=Алис-Спрингс
+AYQ=Айерс-Рок (Улуру)
+
+# Новая Зеландия
+AKL=Окленд
+CHC=Крайстчерч
+WLG=Веллингтон
+ZQN=Квинстаун
+DUD=Данидин
+NSN=Нельсон
+HLZ=Гамильтон
+PMR=Палмерстон-Норт
+NPE=Гастингс
+NPL=Нью-Плимут
+ROT=Роторуа
+TUO=Таупо
+KAI=Кайкоура
+
+# Фиджи
+NAN=Нади
+SUV=Сува
+
+# Папуа Новая Гвинея — уже выше
+
+# Вануату
+VLI=Порт-Вила
+
+# Соломоновы Острова
+HIR=Хониара
+
+# Самоа
+APW=Апиа
+
+# Тонга
+TBU=Нукуалофа
+
+# Французская Полинезия
+PPT=Папеэте (Таити)
+BOB=Бора-Бора
+MOZ=Moorea
+
+# Новая Каледония
+NOU=Нумеа
+
+# Гуам
+GUM=Гуам
+
+# Северные Марианские острова
+SPN=Сайпан
+
+# Микронезия
+TKK=Чуук
+PNI=Понпеи
+
+# Маршалловы Острова
+MAJ=Маджуро
+
+# Палау
+ROR=Корор
+
+# Кирибати
+TRW=Тарава
+
+# Тувалу
+FUN=Фунафути
+
+
+[airlines]
+# Казахстан
+KC=Air Astana
+DV=SCAT
+Z9=Bek Air
+
+# Россия
+SU=Аэрофлот
+S7=S7 Airlines
+U6=Уральские авиалинии
+DP=Победа
+N4=Северный ветер
+FV=Россия
+WZ=Red Wings
+6W=Саратовские авиалинии
+YC=Яр
+RT=РусЛайн
+IK=Икар
+5N=Smartavia
+HZ=Икар
+AK=Азимут
+
+# СНГ
+PS=МАУ (Украина)
+B2=Belavia (Беларусь)
+J2=Azerbaijan Airlines
+A9=Georgian Airways
+HY=Uzbekistan Airways
+QH=Bamboo Airways
+ZM=Tajik Air
+T5=Туркменистан Эйрлайнс
+YM=Montenegro Airlines
+UM=Air Zimbabwe
+
+# Турция
+TK=Turkish Airlines
+PC=Pegasus
+XQ=SunExpress
+AJ=Onur Air
+LY=Corendon Airlines
+
+# Ближний Восток
+EK=Emirates
+FZ=flydubai
+EY=Etihad
+G9=Air Arabia
+WY=Oman Air
+QR=Qatar Airways
+GF=Gulf Air
+SV=Saudia
+XY=flynas
+NE=SaudiGulf Airlines
+OD=Malindo Air
+WB=RwandAir
+ME=Middle East Airlines
+RJ=Royal Jordanian
+IY=Yemenia
+7L=Fly Baghdad
+
+# Африка
+ET=Ethiopian Airlines
+KQ=Kenya Airways
+SA=South African Airways
+MS=EgyptAir
+AT=Royal Air Maroc
+TU=Tunisair
+AH=Air Algerie
+WT=Swiftair
+WB=RwandAir
+TC=Air Tanzania
+QZ=AirAsia Indonesia
+VM=Max Air
+PW=Precision Air
+
+# Европа
+LH=Lufthansa
+BA=British Airways
+AF=Air France
+KL=KLM
+IB=Iberia
+VY=Vueling
+U2=easyJet
+FR=Ryanair
+W6=Wizz Air
+LX=Swiss
+OS=Austrian
+SK=SAS
+AY=Finnair
+SN=Brussels Airlines
+LS=Jet2
+BE=Flybe
+EI=Aer Lingus
+TP=TAP Air Portugal
+A3=Aegean Airlines
+OA=Olympic Air
+TOM=TUI Airways
+X3=TUIfly
+DE=Condor
+AB=Air Berlin
+HV=Transavia
+TO=Transavia France
+BJ=Nouvelair
+ZB=Monarch Airlines
+BY=TUI Airways
+TCX=Thomas Cook
+MT=Thomas Cook Airlines
+OR=TUIfly Netherlands
+TB=TUI fly Belgium
+BV=Blue Panorama
+IG=Meridiana
+AZ=ITA Airways
+EN=Air Dolomiti
+EW=Eurowings
+4U=Germanwings
+LG=Luxair
+OK=Czech Airlines
+QS=SmartWings
+OU=Croatia Airlines
+JP=Adria Airways
+YM=Montenegro Airlines
+JU=Air Serbia
+BT=airBaltic
+OV=SAS Connect
+WF=Wideroe
+DY=Norwegian
+D8=Norwegian
+IBE=Iberia Express
+I2=Iberia Express
+VLG=Vueling
+UX=Air Europa
+NT=Binter Canarias
+PM=Canaryfly
+
+# Азия
+CX=Cathay Pacific
+KA=Cathay Dragon
+NX=Air Macau
+CI=China Airlines
+BR=EVA Air
+CA=Air China
+MU=China Eastern
+CZ=China Southern
+HU=Hainan Airlines
+ZH=Shenzhen Airlines
+XY=flynas
+9C=Spring Airlines
+BK=Okay Airways
+GS=Tianjin Airlines
+KN=China United Airlines
+EU=Chengdu Airlines
+OQ=Chongqing Airlines
+NS=Hebei Airlines
+DZ=Donghai Airlines
+PN=West Air
+JD=Beijing Capital Airlines
+IO=IrAero
+NH=ANA
+JL=Japan Airlines
+MM=Peach Aviation
+GK=Jetstar Japan
+BC=Skymark
+7G=StarFlyer
+SFJ=Starflyer
+NU=Japan Transocean Air
+KE=Korean Air
+OZ=Asiana Airlines
+7C=Jeju Air
+LJ=Jin Air
+BX=Air Busan
+RS=Air Seoul
+4V=Fly Gangwon
+TW=T'way Air
+MH=Malaysia Airlines
+AK=AirAsia
+FY=Firefly
+MH=Malaysia Airlines
+SQ=Singapore Airlines
+MI=SilkAir
+3K=Jetstar Asia
+TR=Scoot
+QF=Qantas
+JQ=Jetstar
+VA=Virgin Australia
+TL=Airnorth
+TG=Thai Airways
+FD=Thai AirAsia
+WE=Thai Smile
+PG=Bangkok Airways
+DD=Nok Air
+SL=Thai Lion Air
+VN=Vietnam Airlines
+VJ=VietJet Air
+BL=Pacific Airlines
+QH=Bamboo Airways
+PR=Philippine Airlines
+5J=Cebu Pacific
+Z2=Philippines AirAsia
+DG=Cebgo
+GA=Garuda Indonesia
+JT=Lion Air
+QG=Citilink
+ID=Batik Air
+IW=Wings Air
+IN=Nam Air
+BI=Royal Brunei
+AI=Air India
+IX=Air India Express
+6E=IndiGo
+SG=SpiceJet
+G8=Go First
+QP=Akasa Air
+UK=Vistara
+9W=Jet Airways
+IT=Kingfisher Airlines
+S2=Jet Lite
+BG=Biman Bangladesh
+UB=Myanmar National Airlines
+K7=Air KBZ
+PK=Pakistan International
+PA=Pakistan International
+AP=Airblue
+ED=Airblue
+NH=ANA
+
+# Северная и Южная Америка
+UA=United Airlines
+AA=American Airlines
+DL=Delta Air Lines
+WN=Southwest Airlines
+B6=JetBlue
+AS=Alaska Airlines
+F9=Frontier Airlines
+NK=Spirit Airlines
+G4=Allegiant Air
+SY=Sun Country Airlines
+HA=Hawaiian Airlines
+AC=Air Canada
+WS=WestJet
+PD=Porter Airlines
+AM=Aeromexico
+Y4=Volaris
+VB=VivaAerobus
+4O=Interjet
+LA=LATAM Airlines
+JJ=LATAM Brasil
+LP=LATAM Peru
+4C=LATAM Colombia
+XL=LATAM Ecuador
+PZ=LATAM Paraguay
+AV=Avianca
+O6=Avianca Brasil
+CM=Copa Airlines
+AD=Azul Brazilian Airlines
+G3=GOL Linhas Aéreas
+AR=Aerolíneas Argentinas
+H2=Sky Airline
+JA=JetSMART
+P9=Peruvian Airlines
+LC=LC Peru
+9R=Satena
+8J=Eco Jet
+S3=Santa Barbara Airlines
+
+# Австралия и Океания
+QF=Qantas
+VA=Virgin Australia
+JQ=Jetstar
+TL=Airnorth
+ZL=Regional Express
+FJ=Fiji Airways
+WR=WestWind Aviation
+NZ=Air New Zealand
+FP=Fly Pelican
+PX=Air Niugini
+SB=Aircalin
+IW=Islands Nationair
+
+# СНГ
+TAS=Ташкент
+FRU=Бишкек
+OSS=Ош
+EVN=Ереван
+GYD=Баку
+TBS=Тбилиси
+SVO=Москва (Шереметьево)
+DME=Москва (Домодедово)
+VKO=Москва (Внуково)
+LED=Санкт-Петербург
+OVB=Новосибирск
+SVX=Екатеринбург
+
+# Европа
+FRA=Франкфурт-на-Майне
+MUC=Мюнхен
+BER=Берлин
+LHR=Лондон (Хитроу)
+LGW=Лондон (Гатвик)
+CDG=Париж (Шарль-де-Голль)
+AMS=Амстердам
+MXP=Милан (Мальпенса)
+FCO=Рим (Фьюмичино)
+MAD=Мадрид
+BCN=Барселона
+VIE=Вена
+ZRH=Цюрих
+PRG=Прага
+BUD=Будапешт
+WAW=Варшава
+ATH=Афины
+IST=Стамбул (Аэропорт Стамбул)
+SAW=Стамбул (Сабиха)
+AYT=Анталья
+DLM=Даламан
+BJV=Бодрум
+HEL=Хельсинки
+ARN=Стокгольм
+CPH=Копенгаген
+
+# Ближний Восток
+DXB=Дубай
+AUH=Абу-Даби
+DOH=Доха
+RUH=Эр-Рияд
+JED=Джидда
+KWI=Кувейт
+MCT=Маскат
+TLV=Тель-Авив
+AMM=Амман
+
+# Азия
+BKK=Бангкок (Суварнабхуми)
+KUL=Куала-Лумпур
+SIN=Сингапур
+HKG=Гонконг
+ICN=Сеул (Инчхон)
+NRT=Токио (Нарита)
+DEL=Дели
+BOM=Мумбаи
+DPS=Бали (Денпасар)
+
+# Северная Америка
+JFK=Нью-Йорк (JFK)
+LAX=Лос-Анджелес
+MIA=Майами
+YYZ=Торонто
+YVR=Ванкувер
+
+[airlines]
+KC=Air Astana
+DV=SCAT
+TK=Turkish Airlines
+LH=Lufthansa
+BA=British Airways
+AF=Air France
+KL=KLM
+EK=Emirates
+FZ=flydubai
+EY=Etihad
+QR=Qatar Airways
+SU=Аэрофлот
+S7=S7 Airlines
+U6=Уральские авиалинии
+HY=Uzbekistan Airways
+PC=Pegasus
+MS=EgyptAir
+ET=Ethiopian Airlines
+SQ=Singapore Airlines
+MH=Malaysia Airlines
+UA=United Airlines
+AA=American Airlines
+DL=Delta Air Lines
+AC=Air Canada
