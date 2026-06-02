@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PNR Converter by Nurdaulet</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #fff;
+    color: #111;
+    min-height: 100vh;
+  }
+
+  /* ── ШАПКА ─────────────────────────────────────────────────── */
+  .header {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+    padding: 10px 14px 6px;
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .logo-sabre {
+    font-family: Impact, 'Arial Black', sans-serif;
+    font-size: 32px;
+    font-style: italic;
+    color: #e8001c;
+    white-space: nowrap;
+    align-self: center;
+    line-height: 1;
+    padding-right: 4px;
+  }
+
+  .input-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+
+  #pnrInput {
+    width: 100%;
+    height: 90px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 6px 8px;
+    resize: vertical;
+    background: #f9f9f9;
+    color: #111;
+    outline: none;
+  }
+  #pnrInput:focus { border-color: #003366; }
+
+  #statusMsg {
+    font-size: 12px;
+    min-height: 16px;
+    color: #cc0000;
+  }
+  #statusMsg.ok { color: #2a7a3a; }
+
+  .right-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .logo-amadeus {
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .logo-amadeus .ama { font-family: Arial, sans-serif; font-size: 20px; color: #003366; font-weight: 400; }
+  .logo-amadeus .DE  { font-family: Arial, sans-serif; font-size: 20px; color: #003366; font-weight: 700; }
+  .logo-amadeus .us  { font-family: Arial, sans-serif; font-size: 20px; color: #003366; font-weight: 400; }
+
+  .header-btns { display: flex; gap: 6px; }
+
+  .btn {
+    border: none; cursor: pointer; border-radius: 3px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 13px; padding: 6px 14px; white-space: nowrap;
+    transition: opacity .15s;
+  }
+  .btn:hover { opacity: .85; }
+  .btn-red  { background: #cc0000; color: #fff; }
+  .btn-blue { background: #003366; color: #fff; }
+
+  /* ── ОБЛАСТЬ КАРТОЧЕК ──────────────────────────────────────── */
+  .cards-area {
+    padding: 10px 14px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* ── КАРТОЧКА ──────────────────────────────────────────────── */
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+    overflow: hidden;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 10px 5px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .card-title {
+    font-weight: 700;
+    font-size: 14px;
+    flex: 1;
+  }
+
+  .icon-btn {
+    background: #f0f0f0; border: none; cursor: pointer;
+    border-radius: 3px; font-size: 13px; padding: 2px 7px;
+    color: #555; line-height: 1.4;
+  }
+  .icon-btn:hover { background: #e0e0e0; }
+
+  .del-btn {
+    background: #cc0000; color: #fff; border: none;
+    cursor: pointer; border-radius: 3px;
+    font-size: 13px; font-weight: 700;
+    padding: 2px 8px; line-height: 1.4;
+  }
+  .del-btn:hover { background: #e04040; }
+
+  /* Превью */
+  .card-preview {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 12.5px;
+    padding: 8px 12px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.55;
+    color: #111;
+    border-bottom: 1px solid #eee;
+    background: #fff;
+  }
+
+  /* Строка управления */
+  .card-ctrl {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 6px 10px 8px;
+    background: #fafafa;
+  }
+
+  /* Одна строка кнопок */
+  .ctrl-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .ctrl-divider {
+    width: 1px; height: 24px;
+    background: #ccc;
+    flex-shrink: 0;
+    margin: 0 3px;
+    align-self: center;
+  }
+
+  .ctrl-pair {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+
+  /* Кнопка-переключатель */
+  .tgl-btn {
+    background: #f0f0f0; color: #444;
+    border: 1px solid #ddd;
+    border-radius: 3px; cursor: pointer;
+    font-size: 12px; padding: 3px 9px;
+    white-space: nowrap; line-height: 1.4;
+    transition: background .12s, color .12s;
+  }
+  .tgl-btn:hover { background: #e4e4e4; }
+  .tgl-btn.active {
+    background: #2d2d2d; color: #fff;
+    border-color: #2d2d2d;
+  }
+
+  /* Поле цены */
+  .price-input {
+    width: 72px; font-size: 12px;
+    border: 1px solid #ccc; border-radius: 3px;
+    padding: 3px 5px; background: #f9f9f9;
+    color: #111; outline: none; font-family: inherit;
+  }
+  .price-input:focus { border-color: #003366; }
+
+  /* ── АДАПТИВ ────────────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .header { flex-wrap: wrap; }
+    .logo-sabre { font-size: 26px; }
+    .logo-amadeus .ama, .logo-amadeus .DE, .logo-amadeus .us { font-size: 16px; }
+    .input-wrap { order: 3; flex-basis: 100%; }
+    .right-col { flex-direction: row; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 6px; }
+    .card-ctrl { gap: 5px; }
+    .ctrl-divider { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── ШАПКА ──────────────────────────────────────────────────── -->
+<div class="header">
+  <span class="logo-sabre">Sabre</span>
+
+  <div class="input-wrap">
+    <textarea id="pnrInput" placeholder="Вставьте строки PNR (Ctrl+V — автопарсинг)&#10;Поддерживаются форматы Sabre и Amadeus"></textarea>
+    <div id="statusMsg"></div>
+  </div>
+
+  <div class="right-col">
+    <div class="logo-amadeus">
+      <span class="ama">ama</span><span class="DE">DE</span><span class="us">us</span>
+    </div>
+    <div class="header-btns">
+      <button class="btn btn-red"  onclick="clearAll()">Очистить все</button>
+      <button class="btn btn-blue" onclick="copyAll()">Копировать все</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── КАРТОЧКИ ───────────────────────────────────────────────── -->
+<div class="cards-area" id="cardsArea"></div>
+
+<script>
+'use strict';
+
+// ═══════════════════════════════════════════════════════════════
+// БАЗА АЭРОПОРТОВ И АВИАКОМПАНИЙ (встроенная, fallback)
+// ═══════════════════════════════════════════════════════════════
+
+const AIRPORTS = {
+  ALA:"Алматы",NQZ:"Астана",TSE:"Астана",GUW:"Атырау",AKX:"Актобе",
+  SCO:"Актау",URA:"Уральск",PWQ:"Павлодар",KZO:"Кызылорда",CIT:"Шымкент",
+  TDK:"Талдыкорган",EKB:"Экибастуз",UKK:"Усть-Каменогорск",KGF:"Қарағанды",
+  TAS:"Ташкент",OSS:"Ош",FRU:"Бишкек",SKD:"Самарканд",BHK:"Бухара",
+  EVN:"Ереван",GYD:"Баку",TBS:"Тбилиси",KBP:"Киев (Борисполь)",
+  IEV:"Киев (Жуляны)",MSQ:"Минск",RIX:"Рига",TLL:"Таллин",VNO:"Вильнюс",
+  ODS:"Одесса",LWO:"Львов",SVO:"Москва (Шереметьево)",DME:"Москва (Домодедово)",
+  VKO:"Москва (Внуково)",ZIA:"Москва (Жуковский)",LED:"Санкт-Петербург",
+  OVB:"Новосибирск",SVX:"Екатеринбург",KJA:"Красноярск",AER:"Сочи",
+  KRR:"Краснодар",ROV:"Ростов-на-Дону",UFA:"Уфа",KZN:"Казань",IKT:"Иркутск",
+  VVO:"Владивосток",HTA:"Чита",AAQ:"Анапа",MRV:"Минеральные Воды",ASF:"Астрахань",
+  FRA:"Франкфурт-на-Майне",MUC:"Мюнхен",BER:"Берлин",HAM:"Гамбург",
+  DUS:"Дюссельдорф",STR:"Штутгарт",CGN:"Кёльн",LHR:"Лондон (Хитроу)",
+  LGW:"Лондон (Гатвик)",LTN:"Лондон (Лутон)",STN:"Лондон (Станстед)",
+  MAN:"Манчестер",EDI:"Эдинбург",CDG:"Париж (Шарль-де-Голль)",ORY:"Париж (Орли)",
+  AMS:"Амстердам",BRU:"Брюссель",ZRH:"Цюрих",GVA:"Женева",BSL:"Базель",
+  VIE:"Вена",PRG:"Прага",BUD:"Будапешт",WAW:"Варшава",KRK:"Краков",
+  WRO:"Вроцлав",GDN:"Гданьск",MXP:"Милан (Мальпенса)",LIN:"Милан (Линате)",
+  BGY:"Милан (Бергамо)",FCO:"Рим (Фьюмичино)",CIA:"Рим (Чампино)",NAP:"Неаполь",
+  VCE:"Венеция",BLQ:"Болонья",FLR:"Флоренция",MAD:"Мадрид",BCN:"Барселона",
+  VLC:"Валенсия",AGP:"Малага",PMI:"Пальма",LIS:"Лиссабон",OPO:"Порту",FAO:"Фару",
+  ATH:"Афины",SKG:"Салоники",HER:"Ираклион",RHO:"Родос",CFU:"Корфу",
+  IST:"Стамбул (Аэропорт Стамбул)",SAW:"Стамбул (Сабиха)",ESB:"Анкара",
+  AYT:"Анталья",DLM:"Даламан",BJV:"Бодрум",ADB:"Измир",ARN:"Стокгольм",
+  GOT:"Гётеборг",CPH:"Копенгаген",OSL:"Осло",HEL:"Хельсинки",RVN:"Рованиеми",
+  OTP:"Бухарест",SOF:"София",BEG:"Белград",ZAG:"Загреб",DUB:"Дублин",
+  KEF:"Рейкьявик",LUX:"Люксембург",NCE:"Ницца",MRS:"Марсель",LYS:"Лион",
+  BOD:"Бордо",TLS:"Тулуза",SXF:"Берлин (Шёнефельд)",TXL:"Берлин (Тегель)",
+  DXB:"Дубай",AUH:"Абу-Даби",SHJ:"Шарджа",DOH:"Доха",RUH:"Эр-Рияд",
+  JED:"Джидда",DMM:"Даммам",MED:"Медина",TIF:"Таиф",KWI:"Кувейт",BAH:"Бахрейн",
+  MCT:"Маскат",SLL:"Салала",TLV:"Тель-Авив",AMM:"Амман",AQJ:"Акаба",
+  BEY:"Бейрут",BGW:"Багдад",BSR:"Басра",EBL:"Эрбиль",DAM:"Дамаск",
+  THR:"Тегеран (Мехрабад)",IKA:"Тегеран (Имам Хомейни)",MHD:"Мешхед",
+  BKK:"Бангкок (Суварнабхуми)",DMK:"Бангкок (Дон Мыанг)",KUL:"Куала-Лумпур",
+  SIN:"Сингапур",CGK:"Джакарта",DPS:"Бали (Денпасар)",SUB:"Сурабая",
+  HKG:"Гонконг",MFM:"Макао",ICN:"Сеул (Инчхон)",GMP:"Сеул (Кимпо)",PUS:"Пусан",
+  NRT:"Токио (Нарита)",HND:"Токио (Ханеда)",KIX:"Осака",CTS:"Саппоро",
+  PEK:"Пекин (Столичный)",PKX:"Пекин (Дасин)",PVG:"Шанхай (Пудун)",
+  SHA:"Шанхай (Хунцяо)",CAN:"Гуанчжоу",SZX:"Шэньчжэнь",CTU:"Чэнду",
+  CKG:"Чунцин",XIY:"Сиань",WUH:"Ухань",DEL:"Дели",BOM:"Мумбаи",BLR:"Бангалор",
+  MAA:"Ченнаи",HYD:"Хайдарабад",CCU:"Калькутта",AMD:"Ахмедабад",GOI:"Гоа",
+  CMB:"Коломбо",MLE:"Мале",KTM:"Катманду",DAC:"Дакка",RGN:"Янгон",
+  SGN:"Хошимин",HAN:"Ханой",DAD:"Дананг",MNL:"Манила",CEB:"Себу",
+  ULN:"Улан-Батор",URC:"Урумчи",CAI:"Каир",HRG:"Хургада",SSH:"Шарм-эль-Шейх",
+  LXR:"Луксор",ASW:"Асуан",ADD:"Аддис-Абеба",NBO:"Найроби",DAR:"Дар-эс-Салам",
+  ZNZ:"Занзибар",JNB:"Йоханнесбург",CPT:"Кейптаун",DUR:"Дурбан",LOS:"Лагос",
+  ABV:"Абуджа",ACC:"Аккра",DKR:"Дакар",CMN:"Касабланка",RAK:"Марракеш",
+  TUN:"Тунис",ALG:"Алжир",TIP:"Триполи",JFK:"Нью-Йорк (JFK)",
+  EWR:"Нью-Йорк (Ньюарк)",LGA:"Нью-Йорк (Ла-Гуардия)",LAX:"Лос-Анджелес",
+  SFO:"Сан-Франциско",SEA:"Сиэтл",LAS:"Лас-Вегас",ORD:"Чикаго (О'Хара)",
+  MDW:"Чикаго (Мидуэй)",MIA:"Майами",FLL:"Форт-Лодердейл",MCO:"Орландо",
+  TPA:"Тампа",IAD:"Вашингтон (Даллес)",DCA:"Вашингтон (Рейган)",BWI:"Балтимор",
+  BOS:"Бостон",PHL:"Филадельфия",ATL:"Атланта",CLT:"Шарлотт",DFW:"Даллас",
+  HOU:"Хьюстон",IAH:"Хьюстон (Буш)",DEN:"Денвер",PHX:"Финикс",SAN:"Сан-Диего",
+  PDX:"Портленд",YYZ:"Торонто",YVR:"Ванкувер",YUL:"Монреаль",YYC:"Калгари",
+  YEG:"Эдмонтон",YOW:"Оттава",YHZ:"Галифакс",MEX:"Мехико",CUN:"Канкун",
+  GDL:"Гвадалахара",GRU:"Сан-Паулу",GIG:"Рио-де-Жанейро",BSB:"Бразилиа",
+  SSA:"Сальвадор",EZE:"Буэнос-Айрес",AEP:"Буэнос-Айрес (Аэропарк)",SCL:"Сантьяго",
+  LIM:"Лима",BOG:"Богота",UIO:"Кито",HAV:"Гавана",SYD:"Сидней",MEL:"Мельбурн",
+  BNE:"Брисбен",PER:"Перт",ADL:"Аделаида",AKL:"Окленд",CHC:"Крайстчерч",
+  NAN:"Нади (Фиджи)",PPT:"Папеэте"
+};
+
+const AIRLINES = {
+  KC:"Air Astana",DV:"SCAT",MA:"MIAT",HY:"Uzbekistan Airways",
+  J2:"Azerbaijan Airlines",B2:"Belavia",PS:"МАУ",A9:"Georgian Airways",
+  SU:"Аэрофлот",S7:"S7 Airlines",U6:"Уральские авиалинии",DP:"Победа",
+  N4:"Северный ветер",WZ:"Red Wings",FV:"Россия",YC:"Яр",
+  TK:"Turkish Airlines",PC:"Pegasus",XQ:"SunExpress",YM:"Montenegro Airlines",
+  LH:"Lufthansa",BA:"British Airways",AF:"Air France",KL:"KLM",IB:"Iberia",
+  VY:"Vueling",U2:"easyJet",FR:"Ryanair",W6:"Wizz Air",LX:"Swiss",OS:"Austrian",
+  SK:"SAS",AY:"Finnair",SN:"Brussels Airlines",EK:"Emirates",FZ:"flydubai",
+  EY:"Etihad",G9:"Air Arabia",WY:"Oman Air",QR:"Qatar Airways",GF:"Gulf Air",
+  SV:"Saudia",XY:"flynas",MS:"EgyptAir",ET:"Ethiopian Airlines",KQ:"Kenya Airways",
+  SA:"South African Airways",AI:"Air India","6E":"IndiGo",SG:"SpiceJet",UK:"Vistara",
+  TG:"Thai Airways",MH:"Malaysia Airlines",SQ:"Singapore Airlines",CX:"Cathay Pacific",
+  GA:"Garuda Indonesia",PR:"Philippine Airlines",OZ:"Asiana Airlines",KE:"Korean Air",
+  NH:"ANA",JL:"Japan Airlines",CA:"Air China",MU:"China Eastern",CZ:"China Southern",
+  UA:"United Airlines",AA:"American Airlines",DL:"Delta Air Lines",WN:"Southwest Airlines",
+  B6:"JetBlue",AS:"Alaska Airlines",AC:"Air Canada",WS:"WestJet",AM:"Aeromexico",
+  LA:"LATAM",AV:"Avianca",CM:"Copa Airlines"
+};
+
+const MONTHS_RU = {
+  JAN:"янв",FEB:"фев",MAR:"мар",APR:"апр",MAY:"май",JUN:"июн",
+  JUL:"июл",AUG:"авг",SEP:"сен",OCT:"окт",NOV:"ноя",DEC:"дек"
+};
+const MONTH_NUM = {
+  JAN:1,FEB:2,MAR:3,APR:4,MAY:5,JUN:6,JUL:7,AUG:8,SEP:9,OCT:10,NOV:11,DEC:12
+};
+
+// ═══════════════════════════════════════════════════════════════
+// ЗАГРУЗКА УДАЛЁННОЙ БАЗЫ
+// ═══════════════════════════════════════════════════════════════
+
+const AIRPORTS_URL = "https://gist.githubusercontent.com/nurikiitu/da9b33a1a1302d0231be3a36818c4e03/raw/pnr_db.txt"; // ← заменить после создания Gist
+
+function parseRemoteDB(text) {
+  let mode = 'airports';
+  for (const raw of text.split('\n')) {
+    const line = raw.trim();
+    if (!line || line.startsWith('#')) continue;
+    if (line.toLowerCase() === '[airlines]') { mode = 'airlines'; continue; }
+    for (const token of line.split(/\s+/)) {
+      const eq = token.indexOf('=');
+      if (eq < 1) continue;
+      const code = token.slice(0, eq).toUpperCase();
+      const name = token.slice(eq + 1).replace(/_/g, ' ');
+      if (mode === 'airlines') AIRLINES[code] = name;
+      else AIRPORTS[code] = name;
+    }
+  }
+}
+
+async function loadRemoteDB() {
+  if (AIRPORTS_URL.includes('GIST_URL')) return;
+  try {
+    const r = await fetch(AIRPORTS_URL);
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    parseRemoteDB(await r.text());
+    console.log('База аэропортов загружена из сети');
+  } catch (e) {
+    console.log('Используется встроенная база:', e.message);
+  }
+}
+loadRemoteDB();
+
+// ═══════════════════════════════════════════════════════════════
+// ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
+// ═══════════════════════════════════════════════════════════════
+
+function toMins(hhmm) {
+  return parseInt(hhmm.slice(0,2), 10) * 60 + parseInt(hhmm.slice(2), 10);
+}
+
+function monthNum(mon) {
+  return MONTH_NUM[(mon||'').toUpperCase()] || 1;
+}
+
+function fmtTime(hhmm) {
+  return hhmm.slice(0,2) + ':' + hhmm.slice(2);
+}
+
+function plural(n, f1, f2, f5) {
+  n = Math.abs(n);
+  const r100 = n % 100, r10 = n % 10;
+  if (r100 >= 11 && r100 <= 14) return f5;
+  if (r10 === 1) return f1;
+  if (r10 >= 2 && r10 <= 4) return f2;
+  return f5;
+}
+
+function fmtDur(mins) {
+  const h = Math.floor(mins / 60), m = mins % 60;
+  const parts = [];
+  if (h) parts.push(h + ' ' + plural(h,'час','часа','часов'));
+  if (m) parts.push(m + ' ' + plural(m,'минута','минуты','минут'));
+  return parts.length ? parts.join(', ') : '0 минут';
+}
+
+function airportName(code) { return AIRPORTS[code.toUpperCase()] || code; }
+function airlineName(code) { return AIRLINES[code.toUpperCase()] || code; }
+function monthRu(mon)      { return MONTHS_RU[(mon||'').toUpperCase()] || mon.toLowerCase(); }
+
+// ═══════════════════════════════════════════════════════════════
+// РАСЧЁТ ДЛИТЕЛЬНОСТИ И ПЕРЕСАДКИ
+// ═══════════════════════════════════════════════════════════════
+
+function calcDuration(seg) {
+  let d = toMins(seg.dep);
+  let a = toMins(seg.arr);
+  const dd = parseInt(seg.depDay, 10), ad = parseInt(seg.arrDay, 10);
+  const dm = monthNum(seg.depMon), am = monthNum(seg.arrMon);
+  if (ad > dd || am > dm) a += 1440;
+  else if (a < d) a += 1440;
+  return a - d;
+}
+
+function calcLayover(s1, s2) {
+  const arr = toMins(s1.arr);
+  const dep = toMins(s2.dep);
+  const ad = parseInt(s1.arrDay, 10), dd2 = parseInt(s2.depDay, 10);
+  const am = monthNum(s1.arrMon), dm2 = monthNum(s2.depMon);
+  let dayDiff = 0;
+  if (dd2 > ad || dm2 > am) dayDiff = 1;
+  let layover = dep + dayDiff * 1440 - arr;
+  if (layover < 0) layover += 1440;
+  return layover;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ПАРСЕР
+// ═══════════════════════════════════════════════════════════════
+
+// Мусорные строки
+// Подстроки, которые в любом месте строки означают мусор
+const JUNK_ANYWHERE = [
+  'OPERATED BY','PLS ADD','TKT/TIME LIMIT','SEE RTSVC','FARE QUOTE'
+];
+// Префиксы — мусорные только если строка НАЧИНАЕТСЯ с них (после пробелов)
+const JUNK_PREFIX = ['/DC','RP/','--- MSC','--- AIR'];
+
+function isJunk(line) {
+  const u = line.toUpperCase().trim();
+  if (JUNK_ANYWHERE.some(j => u.includes(j))) return true;
+  if (JUNK_PREFIX.some(j => u.startsWith(j)))  return true;
+  if (/^[0-9A-Z]{2,}\.[0-9A-Z]{2,}/.test(u))  return true; // 77E8.77E8
+  return false;
+}
+
+// Паттерн для извлечения времён из остатка строки (HHMM формат)
+const RE_TIME = /([01]\d[0-5]\d|2[0-3][0-5]\d)/g;
+// Дата прилёта следующий день: после второго времени (\d{1,2})([A-Z]{3})\s+\d
+const RE_ARRDATE = /(?<!\w)(\d{1,2})([A-Z]{3})(?!\w)/;
+
+function extractTimes(rest, depDay, depMon) {
+  const times = [];
+  let m;
+  const re = new RegExp(RE_TIME.source, 'g');
+  while ((m = re.exec(rest)) !== null) {
+    times.push({ val: m[1], idx: m.index + m[0].length });
+    if (times.length === 2) break;
+  }
+  if (times.length < 2) return null;
+  const depTime = times[0].val;
+  const arrTime = times[1].val;
+  const afterArr = rest.slice(times[1].idx);
+  const dm = RE_ARRDATE.exec(afterArr);
+  return {
+    depTime,
+    arrTime,
+    arrDay: dm ? dm[1] : depDay,
+    arrMon: dm ? dm[2].toUpperCase() : depMon.toUpperCase()
+  };
+}
+
+// Регулярки форматов
+// Sabre SS/HK/UN (класс тарифа слитно с номером рейса, 6-символьный маршрут)
+const RE_SABRE = /^\s*(\d+)\s+([A-Z0-9]{2})\s*(\d{1,4})[A-Z]?\s+(\d{1,2})([A-Z]{3})\s+\d\s+([A-Z]{3})([A-Z]{3})[* ]*(?:HK|SS|UN|HL|TK|SA)\d+(.*)$/i;
+// Amadeus (класс тарифа — отдельный токен, 6-символьный маршрут)
+const RE_AMADEUS = /^\s*(\d+)\s+([A-Z0-9]{2})\s*(\d{1,4})\s+[A-Z]\s+(\d{1,2})([A-Z]{3})\s+\d\s+([A-Z]{3})([A-Z]{3})\s+(?:HK|SS|UN|HL|TK|SA)\d+(.*)$/i;
+
+function parseSegments(text) {
+  const segs = {}; // keyed by segment number
+
+  for (const raw of text.split('\n')) {
+    const line = raw.replace(/\r/g, '');
+    if (isJunk(line)) continue;
+
+    // Amadeus first (has separate class-code token)
+    let m = RE_AMADEUS.exec(line);
+    if (m) {
+      const segNum = parseInt(m[1], 10);
+      if (segNum in segs) continue; // дедупликация
+      const depDay = m[4], depMon = m[5].toUpperCase();
+      const t = extractTimes(m[8], depDay, depMon);
+      if (t) {
+        segs[segNum] = {
+          airline: m[2].toUpperCase(), flight: m[3],
+          depDay, depMon,
+          from: m[6].toUpperCase(), to: m[7].toUpperCase(),
+          dep: t.depTime, arr: t.arrTime,
+          arrDay: t.arrDay, arrMon: t.arrMon
+        };
+      }
+      continue;
+    }
+
+    // Sabre SS/HK
+    m = RE_SABRE.exec(line);
+    if (m) {
+      const segNum = parseInt(m[1], 10);
+      if (segNum in segs) continue; // дедупликация
+      const depDay = m[4], depMon = m[5].toUpperCase();
+      const t = extractTimes(m[8], depDay, depMon);
+      if (t) {
+        segs[segNum] = {
+          airline: m[2].toUpperCase(), flight: m[3],
+          depDay, depMon,
+          from: m[6].toUpperCase(), to: m[7].toUpperCase(),
+          dep: t.depTime, arr: t.arrTime,
+          arrDay: t.arrDay, arrMon: t.arrMon
+        };
+      }
+    }
+  }
+
+  return Object.keys(segs)
+    .map(Number)
+    .sort((a, b) => a - b)
+    .map(k => segs[k]);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ОПИСАНИЕ КНОПОК
+// ═══════════════════════════════════════════════════════════════
+
+// Группы: [label, hasPrice, exclusive_group_or_null]
+// exclusive_group: кнопки в одной группе взаимоисключают друг друга
+const BTN_DEFS = [
+  // Row 1
+  { label: 'Багаж включен',        price: true,  row: 1, excl: null       },
+  { label: 'Только ручная кладь',  price: true,  row: 1, excl: null       },
+  { label: 'Взрослый',             price: true,  row: 1, excl: null       },
+  { label: 'Детский',              price: true,  row: 1, excl: null       },
+  // Row 2
+  { label: 'Невозвратный',         price: true,  row: 2, excl: null       },
+  { label: 'Возвратный со штрафом',price: true,  row: 2, excl: null       },
+  { label: 'Штраф',                price: true,  row: 2, excl: null       },
+  { label: 'Обмен возможен',       price: false, row: 2, excl: 'exchange' },
+  { label: 'Обмен запрещён',       price: false, row: 2, excl: 'exchange' },
+];
+
+// Метки в итоговом тексте (lowercase / bold где нужно)
+const OUT_LABEL = {
+  'Невозвратный':          '*Невозвратный*',
+  'Возвратный со штрафом': '*Возвратный со штрафом*',
+  'Штраф':                 'штраф',
+  'Обмен возможен':        'обмен возможен',
+  'Обмен запрещён':        '*обмен запрещён*',
+};
+function outLabel(opt) { return OUT_LABEL[opt] || opt; }
+
+// Порядок групп в строке 💰 (после главной цены)
+const OUTPUT_GROUPS = [
+  { opts: ['Взрослый', 'Детский'],                   sep: ' / ', tg: true  },
+  { opts: ['Багаж включен', 'Только ручная кладь'],  sep: ' | ', tg: true  },
+  { opts: ['Невозвратный', 'Возвратный со штрафом'], sep: ' / ', tg: true  },
+  { opts: ['Штраф'],                                 sep: ' | ', tg: false },
+  { opts: ['Обмен возможен', 'Обмен запрещён'],      sep: ' | ', tg: false },
+];
+
+// ═══════════════════════════════════════════════════════════════
+// ФОРМИРОВАНИЕ ТЕКСТА ВЫВОДА
+// ═══════════════════════════════════════════════════════════════
+
+function buildPriceLine(active, prices, mainPrice) {
+  const mp = (mainPrice || '').trim();
+  const hasOther = active.size > 0;
+
+  // Случай Г: главная цена пустая и ничего не выбрано
+  if (!mp && !hasOther) return '';
+
+  // Собираем секции остальных кнопок
+  const sections = [];
+  for (const grp of OUTPUT_GROUPS) {
+    const parts = grp.opts
+      .filter(o => active.has(o))
+      .map(o => {
+        const p = (prices[o] || '').trim();
+        if (!p) return outLabel(o);
+        return grp.tg ? `${outLabel(o)} ${p}тг` : `${outLabel(o)} ${p}`;
+      });
+    if (parts.length) sections.push(parts.join(grp.sep));
+  }
+
+  // Строим финальную строку
+  const allParts = [];
+  if (mp) allParts.push(`${mp}тг`);
+  allParts.push(...sections);
+
+  return '💰Цена: ' + allParts.join(' | ');
+}
+
+function buildOutput(segments, active, prices, mainPrice, varNum) {
+  if (!segments.length) return '';
+  const lines = [`✈️ Вариант ${varNum} ✈️`];
+
+  for (let i = 0; i < segments.length; i++) {
+    const s = segments[i];
+    lines.push(
+      `🗓️${parseInt(s.depDay, 10)} ${monthRu(s.depMon)}. ` +
+      `${fmtTime(s.dep)} – ${fmtTime(s.arr)}, ` +
+      `${airportName(s.from)} — ${airportName(s.to)}, ` +
+      `${s.airline} ${s.flight}, ${airlineName(s.airline)}. ` +
+      fmtDur(calcDuration(s))
+    );
+    if (i < segments.length - 1) {
+      const layover = calcLayover(s, segments[i+1]);
+      if (layover > 0 && layover <= 1439)
+        lines.push(`_Пересадка ${fmtDur(layover)}_`);
+    }
+  }
+
+  const pl = buildPriceLine(active, prices, mainPrice);
+  if (pl) lines.push(pl);
+  return lines.join('\n');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// UI — КАРТОЧКИ
+// ═══════════════════════════════════════════════════════════════
+
+let cards = [];
+let nextId = 1;
+
+function makePair(card, def) {
+  /** Создаёт пару [кнопка][цена?] и возвращает корень. */
+  const pair = document.createElement('div');
+  pair.className = 'ctrl-pair';
+
+  const btn = document.createElement('button');
+  btn.className = 'tgl-btn';
+  btn.textContent = def.label;
+  btn.addEventListener('click', () => {
+    const lbl = def.label;
+    if (card.active.has(lbl)) {
+      card.active.delete(lbl);
+    } else {
+      // Взаимоисключение внутри одной группы (exchange)
+      if (def.excl) {
+        BTN_DEFS.filter(d => d.excl === def.excl && d.label !== lbl)
+          .forEach(d => card.active.delete(d.label));
+      }
+      card.active.add(lbl);
+    }
+    refreshCard(card);
+  });
+
+  pair.appendChild(btn);
+
+  if (def.price) {
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.className = 'price-input';
+    inp.placeholder = 'цена';
+    inp.addEventListener('input', () => {
+      card.prices[def.label] = inp.value;
+      refreshCard(card);
+    });
+    pair.appendChild(inp);
+    card._inputs[def.label] = inp;
+  }
+
+  card._btns[def.label] = btn;
+  return pair;
+}
+
+function createCard(segments) {
+  const id = nextId++;
+  const card = {
+    id,
+    segments,
+    active:    new Set(), // Set<string> — активные метки
+    prices:    {},        // label → string
+    mainPrice: '',        // главная цена (строка «Цена + поле»)
+    _btns:     {},
+    _inputs:   {},
+  };
+
+  const el = document.createElement('div');
+  el.className = 'card';
+  el.dataset.id = id;
+
+  // Заголовок
+  const hdr = document.createElement('div');
+  hdr.className = 'card-header';
+  const titleEl = document.createElement('div');
+  titleEl.className = 'card-title';
+  ['↑','⚡'].forEach(sym => {
+    const b = document.createElement('button');
+    b.className = 'icon-btn'; b.textContent = sym;
+    hdr.appendChild(b);
+  });
+  const delBtn = document.createElement('button');
+  delBtn.className = 'del-btn'; delBtn.textContent = '✕'; delBtn.title = 'Удалить';
+  delBtn.addEventListener('click', () => deleteCard(id));
+  hdr.prepend(titleEl);
+  hdr.appendChild(delBtn);
+  el.appendChild(hdr);
+
+  // Превью
+  const preview = document.createElement('pre');
+  preview.className = 'card-preview';
+  el.appendChild(preview);
+
+  // Панель кнопок — 2 строки
+  const ctrl = document.createElement('div');
+  ctrl.className = 'card-ctrl';
+
+  for (const rowNum of [1, 2]) {
+    const row = document.createElement('div');
+    row.className = 'ctrl-row';
+
+    // Строка 1: перед всеми кнопками ставим постоянную «Цена + поле»
+    if (rowNum === 1) {
+      const mainPair = document.createElement('div');
+      mainPair.className = 'ctrl-pair';
+
+      const mainBtn = document.createElement('button');
+      mainBtn.className = 'tgl-btn active'; // всегда активна
+      mainBtn.textContent = 'Цена';
+      mainBtn.style.cursor = 'default';     // не кликабельная
+      mainPair.appendChild(mainBtn);
+
+      const mainInp = document.createElement('input');
+      mainInp.type = 'text';
+      mainInp.className = 'price-input';
+      mainInp.placeholder = 'цена';
+      mainInp.addEventListener('input', () => {
+        card.mainPrice = mainInp.value;
+        refreshCard(card);
+      });
+      mainPair.appendChild(mainInp);
+      card._inputs['__main__'] = mainInp;
+
+      row.appendChild(mainPair);
+
+      // Разделитель после главной цены
+      const dvd0 = document.createElement('span');
+      dvd0.textContent = '|';
+      dvd0.style.cssText = 'color:#999;font-size:20px;font-weight:bold;margin:0 6px;align-self:center;';
+      row.appendChild(dvd0);
+    }
+
+    const rowDefs = BTN_DEFS.filter(d => d.row === rowNum);
+    let prevGroup = null;
+    for (const def of rowDefs) {
+      const grpId = OUTPUT_GROUPS.findIndex(g => g.opts.includes(def.label));
+      if (prevGroup !== null && grpId !== prevGroup) {
+        const dvd = document.createElement('span');
+        dvd.textContent = '|';
+        dvd.style.cssText = 'color:#999;font-size:20px;font-weight:bold;margin:0 6px;align-self:center;';
+        row.appendChild(dvd);
+      }
+      prevGroup = grpId;
+      row.appendChild(makePair(card, def));
+    }
+    ctrl.appendChild(row);
+  }
+
+  el.appendChild(ctrl);
+
+  card.el = el;
+  card._titleEl = titleEl;
+  card._preview = preview;
+
+  cards.push(card);
+  document.getElementById('cardsArea').appendChild(el);
+  renumberCards();
+  refreshCard(card);
+  el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function refreshCard(card) {
+  const n = cards.findIndex(c => c.id === card.id) + 1;
+  card._titleEl.textContent = `Вариант ${n}`;
+  // Визуал кнопок
+  for (const [lbl, btn] of Object.entries(card._btns))
+    btn.classList.toggle('active', card.active.has(lbl));
+  // Превью
+  card._preview.textContent = buildOutput(card.segments, card.active, card.prices, card.mainPrice, n);
+}
+
+function deleteCard(id) {
+  const idx = cards.findIndex(c => c.id === id);
+  if (idx < 0) return;
+  cards[idx].el.remove();
+  cards.splice(idx, 1);
+  renumberCards();
+}
+
+function renumberCards() {
+  cards.forEach((card, i) => {
+    const n = i + 1;
+    card._titleEl.textContent = `Вариант ${n}`;
+    card._preview.textContent = buildOutput(card.segments, card.active, card.prices, card.mainPrice, n);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// АВТОПАРСИНГ ПРИ ВСТАВКЕ
+// ═══════════════════════════════════════════════════════════════
+
+const input = document.getElementById('pnrInput');
+const statusEl = document.getElementById('statusMsg');
+let statusTimer = null;
+
+function setStatus(msg, isErr) {
+  clearTimeout(statusTimer);
+  statusEl.textContent = msg;
+  statusEl.className = isErr ? '' : 'ok';
+  if (msg) statusTimer = setTimeout(() => { statusEl.textContent = ''; }, 3000);
+}
+
+function autoParse() {
+  const raw = input.value.trim();
+  if (!raw) return;
+  const segs = parseSegments(raw);
+  if (segs.length) {
+    createCard(segs);
+    input.value = '';
+    setStatus(`✓ Вариант ${cards.length} добавлен`, false);
+  } else {
+    setStatus('⚠ Не удалось распознать сегменты рейса. Проверьте формат.', true);
+  }
+}
+
+input.addEventListener('paste', () => setTimeout(autoParse, 150));
+
+// ═══════════════════════════════════════════════════════════════
+// ГЛОБАЛЬНЫЕ КНОПКИ
+// ═══════════════════════════════════════════════════════════════
+
+function clearAll() {
+  cards.forEach(c => c.el.remove());
+  cards = [];
+  input.value = '';
+  setStatus('', false);
+}
+
+function copyAll() {
+  if (!cards.length) {
+    setStatus('⚠ Нет вариантов для копирования', true);
+    return;
+  }
+  const text = cards.map((card, i) =>
+    buildOutput(card.segments, card.active, card.prices, card.mainPrice, i + 1)
+  ).join('\n\n');
+
+  navigator.clipboard.writeText(text)
+    .then(() => setStatus('✓ Скопировано в буфер обмена!', false))
+    .catch(() => {
+      // fallback для браузеров без clipboard API
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+      setStatus('✓ Скопировано!', false);
+    });
+}
+</script>
+</body>
+</html>
