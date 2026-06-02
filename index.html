@@ -251,89 +251,8 @@
 // БАЗА АЭРОПОРТОВ И АВИАКОМПАНИЙ (встроенная, fallback)
 // ═══════════════════════════════════════════════════════════════
 
-const AIRPORTS = {
-  ALA:"Алматы",NQZ:"Астана",TSE:"Астана",GUW:"Атырау",AKX:"Актобе",
-  SCO:"Актау",URA:"Уральск",PWQ:"Павлодар",KZO:"Кызылорда",CIT:"Шымкент",
-  TDK:"Талдыкорган",EKB:"Экибастуз",UKK:"Усть-Каменогорск",KGF:"Қарағанды",
-  TAS:"Ташкент",OSS:"Ош",FRU:"Бишкек",SKD:"Самарканд",BHK:"Бухара",
-  EVN:"Ереван",GYD:"Баку",TBS:"Тбилиси",KBP:"Киев (Борисполь)",
-  IEV:"Киев (Жуляны)",MSQ:"Минск",RIX:"Рига",TLL:"Таллин",VNO:"Вильнюс",
-  ODS:"Одесса",LWO:"Львов",SVO:"Москва (Шереметьево)",DME:"Москва (Домодедово)",
-  VKO:"Москва (Внуково)",ZIA:"Москва (Жуковский)",LED:"Санкт-Петербург",
-  OVB:"Новосибирск",SVX:"Екатеринбург",KJA:"Красноярск",AER:"Сочи",
-  KRR:"Краснодар",ROV:"Ростов-на-Дону",UFA:"Уфа",KZN:"Казань",IKT:"Иркутск",
-  VVO:"Владивосток",HTA:"Чита",AAQ:"Анапа",MRV:"Минеральные Воды",ASF:"Астрахань",
-  FRA:"Франкфурт-на-Майне",MUC:"Мюнхен",BER:"Берлин",HAM:"Гамбург",
-  DUS:"Дюссельдорф",STR:"Штутгарт",CGN:"Кёльн",LHR:"Лондон (Хитроу)",
-  LGW:"Лондон (Гатвик)",LTN:"Лондон (Лутон)",STN:"Лондон (Станстед)",
-  MAN:"Манчестер",EDI:"Эдинбург",CDG:"Париж (Шарль-де-Голль)",ORY:"Париж (Орли)",
-  AMS:"Амстердам",BRU:"Брюссель",ZRH:"Цюрих",GVA:"Женева",BSL:"Базель",
-  VIE:"Вена",PRG:"Прага",BUD:"Будапешт",WAW:"Варшава",KRK:"Краков",
-  WRO:"Вроцлав",GDN:"Гданьск",MXP:"Милан (Мальпенса)",LIN:"Милан (Линате)",
-  BGY:"Милан (Бергамо)",FCO:"Рим (Фьюмичино)",CIA:"Рим (Чампино)",NAP:"Неаполь",
-  VCE:"Венеция",BLQ:"Болонья",FLR:"Флоренция",MAD:"Мадрид",BCN:"Барселона",
-  VLC:"Валенсия",AGP:"Малага",PMI:"Пальма",LIS:"Лиссабон",OPO:"Порту",FAO:"Фару",
-  ATH:"Афины",SKG:"Салоники",HER:"Ираклион",RHO:"Родос",CFU:"Корфу",
-  IST:"Стамбул (Аэропорт Стамбул)",SAW:"Стамбул (Сабиха)",ESB:"Анкара",
-  AYT:"Анталья",DLM:"Даламан",BJV:"Бодрум",ADB:"Измир",ARN:"Стокгольм",
-  GOT:"Гётеборг",CPH:"Копенгаген",OSL:"Осло",HEL:"Хельсинки",RVN:"Рованиеми",
-  OTP:"Бухарест",SOF:"София",BEG:"Белград",ZAG:"Загреб",DUB:"Дублин",
-  KEF:"Рейкьявик",LUX:"Люксембург",NCE:"Ницца",MRS:"Марсель",LYS:"Лион",
-  BOD:"Бордо",TLS:"Тулуза",SXF:"Берлин (Шёнефельд)",TXL:"Берлин (Тегель)",
-  DXB:"Дубай",AUH:"Абу-Даби",SHJ:"Шарджа",DOH:"Доха",RUH:"Эр-Рияд",
-  JED:"Джидда",DMM:"Даммам",MED:"Медина",TIF:"Таиф",KWI:"Кувейт",BAH:"Бахрейн",
-  MCT:"Маскат",SLL:"Салала",TLV:"Тель-Авив",AMM:"Амман",AQJ:"Акаба",
-  BEY:"Бейрут",BGW:"Багдад",BSR:"Басра",EBL:"Эрбиль",DAM:"Дамаск",
-  THR:"Тегеран (Мехрабад)",IKA:"Тегеран (Имам Хомейни)",MHD:"Мешхед",
-  BKK:"Бангкок (Суварнабхуми)",DMK:"Бангкок (Дон Мыанг)",KUL:"Куала-Лумпур",
-  SIN:"Сингапур",CGK:"Джакарта",DPS:"Бали (Денпасар)",SUB:"Сурабая",
-  HKG:"Гонконг",MFM:"Макао",ICN:"Сеул (Инчхон)",GMP:"Сеул (Кимпо)",PUS:"Пусан",
-  NRT:"Токио (Нарита)",HND:"Токио (Ханеда)",KIX:"Осака",CTS:"Саппоро",
-  PEK:"Пекин (Столичный)",PKX:"Пекин (Дасин)",PVG:"Шанхай (Пудун)",
-  SHA:"Шанхай (Хунцяо)",CAN:"Гуанчжоу",SZX:"Шэньчжэнь",CTU:"Чэнду",
-  CKG:"Чунцин",XIY:"Сиань",WUH:"Ухань",DEL:"Дели",BOM:"Мумбаи",BLR:"Бангалор",
-  MAA:"Ченнаи",HYD:"Хайдарабад",CCU:"Калькутта",AMD:"Ахмедабад",GOI:"Гоа",
-  CMB:"Коломбо",MLE:"Мале",KTM:"Катманду",DAC:"Дакка",RGN:"Янгон",
-  SGN:"Хошимин",HAN:"Ханой",DAD:"Дананг",MNL:"Манила",CEB:"Себу",
-  ULN:"Улан-Батор",URC:"Урумчи",CAI:"Каир",HRG:"Хургада",SSH:"Шарм-эль-Шейх",
-  LXR:"Луксор",ASW:"Асуан",ADD:"Аддис-Абеба",NBO:"Найроби",DAR:"Дар-эс-Салам",
-  ZNZ:"Занзибар",JNB:"Йоханнесбург",CPT:"Кейптаун",DUR:"Дурбан",LOS:"Лагос",
-  ABV:"Абуджа",ACC:"Аккра",DKR:"Дакар",CMN:"Касабланка",RAK:"Марракеш",
-  TUN:"Тунис",ALG:"Алжир",TIP:"Триполи",JFK:"Нью-Йорк (JFK)",
-  EWR:"Нью-Йорк (Ньюарк)",LGA:"Нью-Йорк (Ла-Гуардия)",LAX:"Лос-Анджелес",
-  SFO:"Сан-Франциско",SEA:"Сиэтл",LAS:"Лас-Вегас",ORD:"Чикаго (О'Хара)",
-  MDW:"Чикаго (Мидуэй)",MIA:"Майами",FLL:"Форт-Лодердейл",MCO:"Орландо",
-  TPA:"Тампа",IAD:"Вашингтон (Даллес)",DCA:"Вашингтон (Рейган)",BWI:"Балтимор",
-  BOS:"Бостон",PHL:"Филадельфия",ATL:"Атланта",CLT:"Шарлотт",DFW:"Даллас",
-  HOU:"Хьюстон",IAH:"Хьюстон (Буш)",DEN:"Денвер",PHX:"Финикс",SAN:"Сан-Диего",
-  PDX:"Портленд",YYZ:"Торонто",YVR:"Ванкувер",YUL:"Монреаль",YYC:"Калгари",
-  YEG:"Эдмонтон",YOW:"Оттава",YHZ:"Галифакс",MEX:"Мехико",CUN:"Канкун",
-  GDL:"Гвадалахара",GRU:"Сан-Паулу",GIG:"Рио-де-Жанейро",BSB:"Бразилиа",
-  SSA:"Сальвадор",EZE:"Буэнос-Айрес",AEP:"Буэнос-Айрес (Аэропарк)",SCL:"Сантьяго",
-  LIM:"Лима",BOG:"Богота",UIO:"Кито",HAV:"Гавана",SYD:"Сидней",MEL:"Мельбурн",
-  BNE:"Брисбен",PER:"Перт",ADL:"Аделаида",AKL:"Окленд",CHC:"Крайстчерч",
-  NAN:"Нади (Фиджи)",PPT:"Папеэте"
-};
-
-const AIRLINES = {
-  KC:"Air Astana",DV:"SCAT",MA:"MIAT",HY:"Uzbekistan Airways",
-  J2:"Azerbaijan Airlines",B2:"Belavia",PS:"МАУ",A9:"Georgian Airways",
-  SU:"Аэрофлот",S7:"S7 Airlines",U6:"Уральские авиалинии",DP:"Победа",
-  N4:"Северный ветер",WZ:"Red Wings",FV:"Россия",YC:"Яр",
-  TK:"Turkish Airlines",PC:"Pegasus",XQ:"SunExpress",YM:"Montenegro Airlines",
-  LH:"Lufthansa",BA:"British Airways",AF:"Air France",KL:"KLM",IB:"Iberia",
-  VY:"Vueling",U2:"easyJet",FR:"Ryanair",W6:"Wizz Air",LX:"Swiss",OS:"Austrian",
-  SK:"SAS",AY:"Finnair",SN:"Brussels Airlines",EK:"Emirates",FZ:"flydubai",
-  EY:"Etihad",G9:"Air Arabia",WY:"Oman Air",QR:"Qatar Airways",GF:"Gulf Air",
-  SV:"Saudia",XY:"flynas",MS:"EgyptAir",ET:"Ethiopian Airlines",KQ:"Kenya Airways",
-  SA:"South African Airways",AI:"Air India","6E":"IndiGo",SG:"SpiceJet",UK:"Vistara",
-  TG:"Thai Airways",MH:"Malaysia Airlines",SQ:"Singapore Airlines",CX:"Cathay Pacific",
-  GA:"Garuda Indonesia",PR:"Philippine Airlines",OZ:"Asiana Airlines",KE:"Korean Air",
-  NH:"ANA",JL:"Japan Airlines",CA:"Air China",MU:"China Eastern",CZ:"China Southern",
-  UA:"United Airlines",AA:"American Airlines",DL:"Delta Air Lines",WN:"Southwest Airlines",
-  B6:"JetBlue",AS:"Alaska Airlines",AC:"Air Canada",WS:"WestJet",AM:"Aeromexico",
-  LA:"LATAM",AV:"Avianca",CM:"Copa Airlines"
-};
+const AIRPORTS = {};
+const AIRLINES = {};
 
 const MONTHS_RU = {
   JAN:"янв",FEB:"фев",MAR:"мар",APR:"апр",MAY:"май",JUN:"июн",
@@ -347,37 +266,38 @@ const MONTH_NUM = {
 // ЗАГРУЗКА УДАЛЁННОЙ БАЗЫ
 // ═══════════════════════════════════════════════════════════════
 
-const AIRPORTS_URL = "./pnr_db.txt"; // ← заменить после создания Gist
+const AIRPORTS_URL = "./pnr_db.txt";
 
-function parseRemoteDB(text) {
-  let mode = 'airports';
-  for (const raw of text.split('\n')) {
-    const line = raw.trim();
+function parseDB(text) {
+  let section = 'airports';
+  const lines = text.split('\n');
+  for (let line of lines) {
+    line = line.trim();
     if (!line || line.startsWith('#')) continue;
-    if (line.toLowerCase() === '[airlines]') { mode = 'airlines'; continue; }
-    for (const token of line.split(/\s+/)) {
-      const eq = token.indexOf('=');
-      if (eq < 1) continue;
-      const code = token.slice(0, eq).toUpperCase();
-      const name = token.slice(eq + 1).replace(/_/g, ' ');
-      if (mode === 'airlines') AIRLINES[code] = name;
-      else AIRPORTS[code] = name;
+    if (line === '[airlines]') { section = 'airlines'; continue; }
+    const eq = line.indexOf('=');
+    if (eq === -1) continue;
+    const code = line.substring(0, eq).trim().toUpperCase();
+    const name = line.substring(eq + 1).trim();
+    if (!code || !name) continue;
+    if (section === 'airports') {
+      AIRPORTS[code] = name;
+    } else {
+      AIRLINES[code] = name;
     }
   }
 }
 
-async function loadRemoteDB() {
-  if (AIRPORTS_URL.includes('GIST_URL')) return;
+async function loadAirports() {
   try {
-    const r = await fetch(AIRPORTS_URL);
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    parseRemoteDB(await r.text());
-    console.log('База аэропортов загружена из сети');
-  } catch (e) {
-    console.log('Используется встроенная база:', e.message);
+    const r = await fetch('./pnr_db.txt?v=' + Date.now());
+    const text = await r.text();
+    parseDB(text);
+  } catch(e) {
+    console.log('База не загружена:', e);
   }
 }
-loadRemoteDB();
+document.addEventListener('DOMContentLoaded', loadAirports);
 
 // ═══════════════════════════════════════════════════════════════
 // ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
