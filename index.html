@@ -355,8 +355,9 @@ function calcLayover(s1, s2) {
   const dep = toMins(s2.dep);
   const ad = parseInt(s1.arrDay, 10), dd2 = parseInt(s2.depDay, 10);
   const am = monthNum(s1.arrMon), dm2 = monthNum(s2.depMon);
-  let dayDiff = 0;
-  if (dd2 > ad || dm2 > am) dayDiff = 1;
+  // Подсчёт разницы в днях через разницу месяцев и дней
+  let dayDiff = (dm2 - am) * 31 + (dd2 - ad);
+  if (dayDiff < 0) dayDiff = 0;
   let layover = dep + dayDiff * 1440 - arr;
   if (layover < 0) layover += 1440;
   return layover;
@@ -382,37 +383,42 @@ function isJunk(line) {
   return false;
 }
 
-// Паттерн для извлечения времён из остатка строки (HHMM формат)
-const RE_TIME = /([01]\d[0-5]\d|2[0-3][0-5]\d)/g;
-// Дата прилёта следующий день: после второго времени (\d{1,2})([A-Z]{3})\s+\d
+// Дата прилёта следующий день: \d{1,2}[A-Z]{3} после времени прилёта
 const RE_ARRDATE = /(?<!\w)(\d{1,2})([A-Z]{3})(?!\w)/;
 
 function extractTimes(rest, depDay, depMon) {
+  // Паттерн: HHMM с необязательным суффиксом +N (следующий день)
+  const timePattern = /\b([01]\d[0-5]\d|2[0-3][0-5]\d)(\+\d)?\b/g;
   const times = [];
   let m;
-  const re = new RegExp(RE_TIME.source, 'g');
-  while ((m = re.exec(rest)) !== null) {
-    times.push({ val: m[1], idx: m.index + m[0].length });
+  while ((m = timePattern.exec(rest)) !== null) {
+    times.push({ val: m[1], offset: m[2] ? parseInt(m[2].slice(1), 10) : 0, idx: m.index + m[0].length });
     if (times.length === 2) break;
   }
   if (times.length < 2) return null;
   const depTime = times[0].val;
   const arrTime = times[1].val;
-  const afterArr = rest.slice(times[1].idx);
-  const dm = RE_ARRDATE.exec(afterArr);
-  return {
-    depTime,
-    arrTime,
-    arrDay: dm ? dm[1] : depDay,
-    arrMon: dm ? dm[2].toUpperCase() : depMon.toUpperCase()
-  };
+  const arrOffset = times[1].offset;
+
+  let arrDay = depDay, arrMon = depMon.toUpperCase();
+  if (arrOffset > 0) {
+    // "+1" формат Amadeus — прибавляем дни к дате вылета
+    arrDay = String(parseInt(depDay, 10) + arrOffset);
+  } else {
+    // Ищем явную дату после времени прилёта (например "15JAN")
+    const afterArr = rest.slice(times[1].idx);
+    const dm = RE_ARRDATE.exec(afterArr);
+    if (dm) { arrDay = dm[1]; arrMon = dm[2].toUpperCase(); }
+  }
+
+  return { depTime, arrTime, arrDay, arrMon };
 }
 
 // Регулярки форматов
 // Sabre SS/HK/UN (класс тарифа слитно с номером рейса, 6-символьный маршрут)
-const RE_SABRE = /^\s*(\d+)\s+([A-Z0-9]{2})\s*(\d{1,4})[A-Z]?\s+(\d{1,2})([A-Z]{3})\s+\d\s+([A-Z]{3})([A-Z]{3})[* ]*(?:HK|SS|UN|HL|TK|SA)\d+(.*)$/i;
+const RE_SABRE = /^\s*(\d+)\s+([A-Z0-9]{2})\s*(\d{1,4})[A-Z]?\s+(\d{1,2})([A-Z]{3})\s+\d\s+([A-Z]{3})([A-Z]{3})[* ]*(?:HK|SS|UN|HL|TK|SA|NN|WL|GK|RR|KK|LL)\d+(.*)$/i;
 // Amadeus (класс тарифа — отдельный токен, 6-символьный маршрут)
-const RE_AMADEUS = /^\s*(\d+)\s+([A-Z0-9]{2})\s*(\d{1,4})\s+[A-Z]\s+(\d{1,2})([A-Z]{3})\s+\d\s+([A-Z]{3})([A-Z]{3})\s+(?:HK|SS|UN|HL|TK|SA)\d+(.*)$/i;
+const RE_AMADEUS = /^\s*(\d+)\s+([A-Z0-9]{2})\s*(\d{1,4})\s+[A-Z]\s+(\d{1,2})([A-Z]{3})\s+\d\s+([A-Z]{3})([A-Z]{3})\s+(?:HK|SS|UN|HL|TK|SA|NN|WL|GK|RR|KK|LL)\d+(.*)$/i;
 
 function parseSegments(text) {
   const segs = {}; // keyed by segment number
