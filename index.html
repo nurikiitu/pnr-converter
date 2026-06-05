@@ -435,8 +435,8 @@ function makeSeg(airline, flight, depDay, depMon, from, to, t) {
 }
 
 function parseSegments(text) {
-  const segs = {};    // ключ: номер сегмента (1–99) или авто (1000+)
-  let autoKey = 1000; // авто-нумерация для строк без номера
+  const segs = {};  // ключ: номер сегмента (1–99) или авто (0, 1, 2…)
+  let autoKey = 0;  // авто-нумерация: начинаем с 0, чтобы сортироваться ДО явных номеров
 
   for (const raw of text.split('\n')) {
     const line = raw.replace(/\r/g, '');
@@ -466,7 +466,7 @@ function parseSegments(text) {
     m = RE_AMADEUS_NN.exec(line);
     if (m) {
       const t = extractTimes(m[7], m[3], m[4]);
-      if (t) segs[autoKey++] = makeSeg(m[1], m[2], m[3], m[4], m[5], m[6], t);
+      if (t) { while (autoKey in segs) autoKey++; segs[autoKey++] = makeSeg(m[1], m[2], m[3], m[4], m[5], m[6], t); }
       continue;
     }
 
@@ -474,7 +474,7 @@ function parseSegments(text) {
     m = RE_SABRE_NN.exec(line);
     if (m) {
       const t = extractTimes(m[7], m[3], m[4]);
-      if (t) segs[autoKey++] = makeSeg(m[1], m[2], m[3], m[4], m[5], m[6], t);
+      if (t) { while (autoKey in segs) autoKey++; segs[autoKey++] = makeSeg(m[1], m[2], m[3], m[4], m[5], m[6], t); }
     }
   }
 
