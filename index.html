@@ -254,6 +254,332 @@
 const AIRPORTS = {};
 const AIRLINES = {};
 
+// UTC стандартные смещения для всех аэропортов из pnr_db.txt
+const TIMEZONES = {
+  // Казахстан (UTC+5 с 2024)
+  "ALA":5,"NQZ":5,"CIT":5,"GUW":5,"AKX":5,"SCO":5,"URA":5,"PWQ":5,
+  "KZO":5,"UKK":5,"KGF":5,"TDK":5,"EKB":5,"PLX":5,"DZN":5,"HSA":5,"BXH":5,
+  // Россия
+  "SVO":3,"DME":3,"VKO":3,"ZIA":3,"LED":3,"AER":3,"KRR":3,"ROV":3,
+  "MRV":3,"AAQ":3,"ASF":3,"KZN":3,"GOJ":3,"VOG":3,"VOZ":3,
+  "UFA":5,"SVX":5,"CEK":5,"TJM":5,"SGC":5,"NYM":5,"PEE":5,"REN":5,
+  "KUF":4,
+  "OVB":7,"KJA":7,"TOF":7,"BAX":7,"KEJ":7,"NSK":7,
+  "IKT":8,
+  "HTA":9,"YKS":9,
+  "VVO":10,
+  "UUS":11,"GDX":11,
+  "PKC":12,
+  "OMS":6,
+  // Узбекистан (UTC+5)
+  "TAS":5,"SKD":5,"BHK":5,"NVI":5,"NCU":5,"KSQ":5,"TMZ":5,"UGC":5,
+  // Кыргызстан (UTC+6)
+  "FRU":6,"BSZ":6,"OSS":6,
+  // Китай (UTC+8)
+  "PEK":8,"PKX":8,"PVG":8,"SHA":8,"CAN":8,"SZX":8,"CTU":8,"CKG":8,
+  "XIY":8,"WUH":8,"KMG":8,"HGH":8,"NKG":8,"XMN":8,"TAO":8,"DLC":8,
+  "SHE":8,"HRB":8,"CGO":8,"CSX":8,"NNG":8,"KWL":8,"LHW":8,"URC":8,
+  "HET":8,"TNA":8,"FOC":8,"HAK":8,"SYX":8,"TYN":8,"KHN":8,"WNZ":8,"NGB":8,
+  // Азербайджан (UTC+4)
+  "GYD":4,"LEN":4,"NAJ":4,"GBB":4,
+  // Армения (UTC+4)
+  "EVN":4,"LWN":4,
+  // Грузия (UTC+4)
+  "TBS":4,"BUS":4,"KUT":4,
+  // Туркменистан (UTC+5)
+  "ASB":5,"MYP":5,"CRZ":5,"TAZ":5,
+  // Таджикистан (UTC+5)
+  "DYU":5,"LBD":5,"KQT":5,
+  // Беларусь (UTC+3)
+  "MSQ":3,"GME":3,"VTB":3,
+  // Украина (UTC+2)
+  "KBP":2,"IEV":2,"LWO":2,"ODS":2,"HRK":2,"DNK":2,
+  // Молдова (UTC+2)
+  "KIV":2,
+  // Латвия, Литва, Эстония (UTC+2)
+  "RIX":2,"VNO":2,"PLQ":2,"KUN":2,"TLL":2,
+  // Германия (UTC+1)
+  "FRA":1,"MUC":1,"BER":1,"HAM":1,"DUS":1,"CGN":1,"STR":1,"NUE":1,
+  "HAJ":1,"LEJ":1,"DRS":1,"FKB":1,"SCN":1,"ERF":1,"FMO":1,
+  // Великобритания и Ирландия (UTC+0)
+  "LHR":0,"LGW":0,"STN":0,"LTN":0,"LCY":0,"MAN":0,"BHX":0,"EDI":0,
+  "GLA":0,"BRS":0,"LBA":0,"NCL":0,"BFS":0,"ORK":0,"DUB":0,
+  // Франция (UTC+1)
+  "CDG":1,"ORY":1,"NCE":1,"MRS":1,"LYS":1,"TLS":1,"BOD":1,"NTE":1,
+  "LIL":1,"MPL":1,"SXB":1,"BIQ":1,"CFE":1,"RNS":1,
+  // Италия (UTC+1)
+  "FCO":1,"CIA":1,"MXP":1,"LIN":1,"BGY":1,"VCE":1,"NAP":1,"BLQ":1,
+  "FLR":1,"PSA":1,"CTA":1,"PMO":1,"BRI":1,"CAG":1,"OLB":1,"TRN":1,"VRN":1,
+  // Испания материк (UTC+1)
+  "MAD":1,"BCN":1,"AGP":1,"ALC":1,"PMI":1,"VLC":1,"SVQ":1,"BIO":1,
+  "IBZ":1,"MAH":1,"SDR":1,"ZAZ":1,"GRX":1,
+  // Канарские острова (UTC+0)
+  "TFS":0,"TFN":0,"LPA":0,"ACE":0,"FUE":0,
+  // Португалия (UTC+0)
+  "LIS":0,"OPO":0,"FAO":0,"FNC":0,
+  // Азорские острова (UTC-1)
+  "PDL":-1,"TER":-1,
+  // Нидерланды (UTC+1)
+  "AMS":1,"EIN":1,"RTM":1,"MST":1,
+  // Бельгия (UTC+1)
+  "BRU":1,"CRL":1,"LGG":1,"ANR":1,
+  // Швейцария (UTC+1)
+  "ZRH":1,"GVA":1,"BSL":1,"BRN":1,"LUZ":1,
+  // Австрия (UTC+1)
+  "VIE":1,"GRZ":1,"INN":1,"SZG":1,"LNZ":1,"KLU":1,
+  // Чехия (UTC+1)
+  "PRG":1,"BRQ":1,"OSR":1,
+  // Словакия (UTC+1)
+  "BTS":1,"KSC":1,
+  // Венгрия (UTC+1)
+  "BUD":1,"DEB":1,
+  // Польша (UTC+1)
+  "WAW":1,"KRK":1,"GDN":1,"WRO":1,"POZ":1,"KTW":1,"LCJ":1,"RZE":1,
+  // Румыния (UTC+2)
+  "OTP":2,"BBU":2,"CLJ":2,"TSR":2,"IAS":2,"SBZ":2,"CND":2,
+  // Болгария (UTC+2)
+  "SOF":2,"VAR":2,"BOJ":2,"PDV":2,
+  // Греция (UTC+2)
+  "ATH":2,"SKG":2,"HER":2,"RHO":2,"CFU":2,"KGS":2,"JMK":2,"JTR":2,
+  "ZTH":2,"PVK":2,"KLX":2,"CHQ":2,
+  // Турция (UTC+3)
+  "IST":3,"SAW":3,"AYT":3,"ESB":3,"ADB":3,"DLM":3,"BJV":3,"GZT":3,
+  "TZX":3,"ERZ":3,"VAN":3,"DIY":3,"KYA":3,"SZF":3,"MLX":3,"ASR":3,"GZP":3,
+  // Скандинавия
+  "ARN":1,"NYO":1,"GOT":1,"MMX":1,   // Швеция UTC+1
+  "OSL":1,"TRF":1,"BGO":1,"TRD":1,   // Норвегия UTC+1
+  "CPH":1,"BLL":1,"AAL":1,           // Дания UTC+1
+  "HEL":2,"TMP":2,"TKU":2,"OUL":2,"RVN":2, // Финляндия UTC+2
+  "REK":0,"KEF":0,                   // Исландия UTC+0
+  // Люксембург, Мальта, Кипр
+  "LUX":1,"MLA":1,"LCA":2,"PFO":2,"ECN":2,
+  // Хорватия, Словения (UTC+1)
+  "ZAG":1,"SPU":1,"DBV":1,"ZAD":1,"PUY":1,"RJK":1,"LJU":1,"MBX":1,
+  // Балканы (UTC+1)
+  "BEG":1,"INI":1,"SJJ":1,"BNX":1,"TGD":1,"TIV":1,"SKP":1,"OHD":1,
+  "TIA":1,"PRN":1,
+  // США — восточное (UTC-5)
+  "JFK":-5,"EWR":-5,"LGA":-5,"MIA":-5,"FLL":-5,"MCO":-5,"TPA":-5,
+  "IAD":-5,"DCA":-5,"BWI":-5,"BOS":-5,"PHL":-5,"CLT":-5,"ATL":-5,
+  "DTW":-5,"PIT":-5,"CLE":-5,"CMH":-5,"IND":-5,"BNA":-5,"RDU":-5,
+  "ORF":-5,"RIC":-5,"BUF":-5,"SYR":-5,"ALB":-5,"BDL":-5,"PWM":-5,
+  "BTV":-5,"MHT":-5,"PVD":-5,
+  // США — центральное (UTC-6)
+  "ORD":-6,"MDW":-6,"DFW":-6,"DAL":-6,"IAH":-6,"HOU":-6,"MSP":-6,
+  "STL":-6,"MCI":-6,"MSY":-6,"MEM":-6,"OMA":-6,
+  // США — горное (UTC-7)
+  "DEN":-7,"PHX":-7,"SLC":-7,"ABQ":-7,"TUC":-7,
+  // США — тихоокеанское (UTC-8)
+  "LAX":-8,"SFO":-8,"OAK":-8,"SJC":-8,"SAN":-8,"PDX":-8,"SEA":-8,"LAS":-8,
+  // США — Гавайи (UTC-10)
+  "HNL":-10,"OGG":-10,"KOA":-10,"LIH":-10,
+  // США — Аляска (UTC-9)
+  "ANC":-9,"FAI":-9,"JNU":-9,
+  // Канада — тихоокеанское (UTC-8)
+  "YVR":-8,"YYJ":-8,"YLW":-8,
+  // Канада — горное (UTC-7)
+  "YYC":-7,"YEG":-7,"YZF":-7,"YXY":-7,
+  // Канада — центральное (UTC-6)
+  "YWG":-6,"YXE":-6,"YQR":-6,
+  // Канада — восточное (UTC-5)
+  "YYZ":-5,"YTZ":-5,"YUL":-5,"YOW":-5,"YQT":-5,"YSB":-5,"YGK":-5,
+  "YKF":-5,"YHM":-5,"YXU":-5,"YFB":-5,
+  // Канада — атлантическое (UTC-4)
+  "YHZ":-4,"YFC":-4,"YSJ":-4,"YQM":-4,"YYG":-4,
+  // Канада — Ньюфаундленд (UTC-3.5)
+  "YYT":-3.5,"YDF":-3.5,
+  // Мексика — центральное (UTC-6)
+  "MEX":-6,"CUN":-6,"GDL":-6,"MTY":-6,"AGU":-6,"BJX":-6,"SLP":-6,
+  "VER":-6,"MID":-6,"OAX":-6,"TAP":-6,"VSA":-6,"CZM":-6,"HUX":-6,
+  "ZIH":-6,"ZLO":-6,"MON":-6,"PBC":-6,"QRO":-6,"REX":-6,"TAM":-6,
+  "TRC":-6,"ZCL":-6,"DGO":-6,"PVR":-6,
+  // Мексика — горное (UTC-7)
+  "SJD":-7,"MZT":-7,"HMO":-7,"CJS":-7,"CUL":-7,"CUU":-7,"LAP":-7,
+  // Мексика — тихоокеанское (UTC-8)
+  "TIJ":-8,"MXL":-8,
+  // Бразилия — UTC-3
+  "GRU":-3,"CGH":-3,"VCP":-3,"GIG":-3,"SDU":-3,"BSB":-3,"SSA":-3,
+  "REC":-3,"FOR":-3,"BEL":-3,"CWB":-3,"POA":-3,"FLN":-3,"NAT":-3,
+  "MCZ":-3,"JPA":-3,"AJU":-3,"THE":-3,"SLZ":-3,"MCP":-3,
+  // Бразилия — UTC-4
+  "MAO":-4,"CGR":-4,"CGB":-4,"PVH":-4,"BOA":-4,
+  // Бразилия — Акри (UTC-5)
+  "RBR":-5,
+  // Аргентина (UTC-3)
+  "EZE":-3,"AEP":-3,"COR":-3,"MDZ":-3,"ROS":-3,"BRC":-3,"USH":-3,
+  "IGR":-3,"SLA":-3,"JUJ":-3,"NQN":-3,"REL":-3,"PMY":-3,"FTE":-3,"RSA":-3,
+  // Чили (UTC-4, острова UTC-6)
+  "SCL":-4,"IQQ":-4,"ANF":-4,"CCP":-4,"PMC":-4,"PUQ":-4,"LSC":-4,
+  "ZCO":-4,"ZOS":-4,"IPC":-6,
+  // Колумбия, Перу, Эквадор, Панама (UTC-5)
+  "BOG":-5,"MDE":-5,"CLO":-5,"CTG":-5,"BAQ":-5,"SMR":-5,"ADZ":-5,
+  "PEI":-5,"BGA":-5,"EOH":-5,
+  "LIM":-5,"CUZ":-5,"AQP":-5,"IQT":-5,"TRU":-5,"PIU":-5,"JUL":-5,"CIX":-5,
+  "UIO":-5,"GYE":-5,"PTY":-5,"KIN":-5,"MBJ":-5,"HAV":-5,"VRA":-5,"HOG":-5,"SCU":-5,"PAP":-5,"NAS":-5,
+  // Галапагос (UTC-6)
+  "GPS":-6,
+  // Венесуэла, Болгария, Парагвай (UTC-4)
+  "CCS":-4,"MAR":-4,"VLN":-4,"BRM":-4,"PMV":-4,
+  "LPB":-4,"VVI":-4,"CBB":-4,"SRE":-4,
+  "ASU":-4,
+  // Барбадос, Тринидад, Доминиканская Республика, Пуэрто-Рико (UTC-4)
+  "BGI":-4,"POS":-4,"SDQ":-4,"PUJ":-4,"STI":-4,"SJU":-4,
+  // Уругвай (UTC-3)
+  "MVD":-3,
+  // Центральная Америка (UTC-6)
+  "SJO":-6,"GUA":-6,"TGU":-6,"SAP":-6,"SAL":-6,"MGA":-6,
+  // Япония (UTC+9)
+  "NRT":9,"HND":9,"KIX":9,"ITM":9,"NGO":9,"CTS":9,"FUK":9,"OKA":9,
+  "HIJ":9,"KOJ":9,"KMJ":9,"NGS":9,"OIT":9,"MYJ":9,"TAK":9,"TKS":9,
+  "KCZ":9,"AOJ":9,"SDJ":9,"AXT":9,"GAJ":9,"FKS":9,"KIJ":9,"TOY":9,
+  "KMQ":9,"OKJ":9,
+  // Южная Корея (UTC+9)
+  "ICN":9,"GMP":9,"PUS":9,"CJU":9,"TAE":9,"CJJ":9,"RSU":9,"KWJ":9,
+  "WJU":9,"YNY":9,
+  // Северная Корея (UTC+9)
+  "FNJ":9,
+  // Монголия (UTC+8)
+  "ULN":8,
+  // Индия (UTC+5.5)
+  "DEL":5.5,"BOM":5.5,"BLR":5.5,"MAA":5.5,"HYD":5.5,"CCU":5.5,"AMD":5.5,
+  "GOI":5.5,"COK":5.5,"TRV":5.5,"PNQ":5.5,"NAG":5.5,"JAI":5.5,"LKO":5.5,
+  "PAT":5.5,"BBI":5.5,"GAU":5.5,"IXB":5.5,"VNS":5.5,"ATQ":5.5,"IXC":5.5,
+  "SXR":5.5,"IXL":5.5,"UDR":5.5,"JDH":5.5,"IXZ":5.5,
+  // Пакистан (UTC+5)
+  "KHI":5,"LHE":5,"ISB":5,"PEW":5,"MUX":5,"SKZ":5,"LYP":5,"UET":5,
+  // Бангладеш (UTC+6)
+  "DAC":6,"CGP":6,"ZYL":6,
+  // Шри-Ланка (UTC+5.5)
+  "CMB":5.5,"HRI":5.5,
+  // Непал (UTC+5.75)
+  "KTM":5.75,"PKR":5.75,"BIR":5.75,
+  // Мальдивы (UTC+5)
+  "MLE":5,"GAN":5,
+  // Мьянма (UTC+6.5)
+  "RGN":6.5,"MDL":6.5,
+  // Таиланд (UTC+7)
+  "BKK":7,"DMK":7,"HKT":7,"CNX":7,"USM":7,"UTP":7,"HDY":7,"CEI":7,
+  // Вьетнам (UTC+7)
+  "SGN":7,"HAN":7,"DAD":7,"CXR":7,"PQC":7,"VII":7,"HUI":7,"UIH":7,
+  // Камбоджа, Лаос (UTC+7)
+  "PNH":7,"REP":7,"VTE":7,"LPQ":7,
+  // Малайзия (UTC+8)
+  "KUL":8,"SZB":8,"PEN":8,"BKI":8,"KCH":8,"LGK":8,"JHB":8,"AOR":8,
+  "IPH":8,"MYY":8,"SDK":8,
+  // Сингапур (UTC+8)
+  "SIN":8,
+  // Индонезия — WIB (UTC+7): Ява, Суматра
+  "CGK":7,"SUB":7,"SRG":7,"JOG":7,"SOC":7,"PLM":7,"PKU":7,"BTH":7,
+  // Индонезия — WITA (UTC+8): Бали, Сулавеси, Калимантан
+  "DPS":8,"UPG":8,"MDC":8,"BPN":8,"LOP":8,"KOE":8,
+  // Индонезия — WIT (UTC+9): Малуку, Папуа
+  "AMQ":9,"TIM":9,"DJJ":9,
+  // Филиппины (UTC+8)
+  "MNL":8,"CEB":8,"DVO":8,"ILO":8,"BCD":8,"KLO":8,"MPH":8,"ZAM":8,
+  "GEN":8,"PPS":8,
+  // Бруней (UTC+8)
+  "BWN":8,
+  // Восточный Тимор (UTC+9)
+  "DIL":9,
+  // Папуа Новая Гвинея (UTC+10)
+  "POM":10,
+  // Гонконг, Макао (UTC+8)
+  "HKG":8,"MFM":8,
+  // Тайвань (UTC+8)
+  "TPE":8,"TSA":8,"KHH":8,"RMQ":8,"TNN":8,"TTT":8,
+  // Афганистан (UTC+4.5)
+  "KBL":4.5,"KDH":4.5,"HEA":4.5,"MZR":4.5,
+  // Иран (UTC+3.5)
+  "IKA":3.5,"THR":3.5,"MHD":3.5,"SYZ":3.5,"IFN":3.5,"TBZ":3.5,
+  "AHZ":3.5,"KER":3.5,"BND":3.5,"AWZ":3.5,
+  // Ирак (UTC+3)
+  "BGW":3,"BSR":3,"EBL":3,"NJF":3,"ISU":3,
+  // Сирия (UTC+3)
+  "DAM":3,"ALP":3,"LTK":3,
+  // Ливан (UTC+2)
+  "BEY":2,
+  // Иордания (UTC+3)
+  "AMM":3,"AQJ":3,
+  // Израиль, Палестина (UTC+2)
+  "TLV":2,"ETH":2,"VDA":2,
+  // Йемен (UTC+3)
+  "SAH":3,"ADE":3,
+  // Оман (UTC+4)
+  "MCT":4,"SLL":4,"DQM":4,
+  // ОАЭ (UTC+4)
+  "DXB":4,"AUH":4,"SHJ":4,"RKT":4,"FJR":4,"AAN":4,
+  // Катар, Кувейт, Бахрейн (UTC+3)
+  "DOH":3,"KWI":3,"BAH":3,
+  // Саудовская Аравия (UTC+3)
+  "RUH":3,"JED":3,"MED":3,"DMM":3,"AHB":3,"TIF":3,"HOF":3,"GIZ":3,
+  "EAM":3,"RAE":3,"TUU":3,"URY":3,"ELQ":3,
+  // Египет (UTC+2)
+  "CAI":2,"HRG":2,"SSH":2,"LXR":2,"ASW":2,"ABS":2,"MUH":2,"TCP":2,"RMF":2,
+  // Марокко, Тунис, Алжир (UTC+1)
+  "CMN":1,"RAK":1,"FEZ":1,"TNG":1,"OUD":1,"AGA":1,"NDR":1,"RBA":1,"TTA":1,"ERH":1,
+  "TUN":1,"MIR":1,"DJE":1,"TOE":1,"SFA":1,
+  "ALG":1,"ORN":1,"AAE":1,"CZL":1,"TLM":1,"TMR":1,"GJL":1,
+  // Ливия (UTC+2)
+  "TIP":2,"BEN":2,"SEB":2,
+  // Судан (UTC+3)
+  "KRT":3,"PZU":3,
+  // Эфиопия, Кения, Танзания, Уганда, Сомали, Джибути, Эритрея (UTC+3)
+  "ADD":3,"DIR":3,"JIM":3,"MQX":3,"BJR":3,"GDQ":3,"AWA":3,
+  "NBO":3,"WIL":3,"MBA":3,"KIS":3,"EDL":3,
+  "DAR":3,"ZNZ":3,"JRO":3,"MWZ":3,"ARK":3,
+  "EBB":3,"MGQ":3,"JIB":3,"ASM":3,
+  // Мадагаскар (UTC+3)
+  "TNR":3,"MJN":3,"DIE":3,"TMM":3,
+  // Маврикий, Реюньон, Сейшелы (UTC+4)
+  "MRU":4,"RUN":4,"SEZ":4,
+  // Руанда, Бурунди (UTC+2)
+  "KGL":2,"BJM":2,
+  // Замбия, Зимбабве, Мозамбик, Малави, Намибия, Ботсвана, ЮАР, Эсватини, Лесото (UTC+2)
+  "LUN":2,"NLA":2,"LVI":2,
+  "HRE":2,"BUQ":2,"VFA":2,
+  "MPM":2,"BEW":2,
+  "LLW":2,"BLZ":2,
+  "WDH":2,"SWP":2,
+  "GBE":2,"MUB":2,"BBK":2,
+  "JNB":2,"CPT":2,"DUR":2,"PLZ":2,"BFN":2,"ELS":2,"GRJ":2,"MQP":2,
+  "SHO":2,"MSU":2,
+  // Ангола, Конго (UTC+1)
+  "LAD":1,"BZV":1,"PNR":1,"DLA":1,"NSI":1,"LBV":1,"SSG":1,
+  // Конго ДРК: Киншаса UTC+1, восток UTC+2
+  "FIH":1,"FKI":2,"FBM":2,
+  // Нигерия, Нигер, Чад, Камерун, Бенин, Габон (UTC+1)
+  "LOS":1,"ABV":1,"KAN":1,"PHC":1,"ENU":1,"NIM":1,"NDJ":1,"COO":1,
+  // Западная Африка (UTC+0)
+  "ACC":0,"KMS":0,"ABJ":0,"DKR":0,"BKO":0,"OUA":0,"FNA":0,"ROB":0,
+  "CKY":0,"BJL":0,"NKC":0,"LFW":0,
+  // Кабо-Верде (UTC-1)
+  "SID":-1,"RAI":-1,
+  // Австралия — AEST (UTC+10)
+  "SYD":10,"MEL":10,"BNE":10,"CBR":10,"OOL":10,"CNS":10,"TSV":10,
+  "MKY":10,"ROK":10,"HBA":10,"LST":10,
+  // Австралия — ACST (UTC+9.5)
+  "ADL":9.5,"DRW":9.5,"ASP":9.5,"AYQ":9.5,
+  // Австралия — AWST (UTC+8)
+  "PER":8,
+  // Новая Зеландия (UTC+12)
+  "AKL":12,"CHC":12,"WLG":12,"ZQN":12,"DUD":12,"NSN":12,"HLZ":12,
+  "PMR":12,"NPE":12,"NPL":12,"ROT":12,"TUO":12,"KAI":12,
+  // Фиджи, Маршаллы, Кирибати, Тувалу (UTC+12)
+  "NAN":12,"SUV":12,"MAJ":12,"TRW":12,"FUN":12,
+  // Вануату, Новая Каледония, Соломоны, Микронезия-Понпеи (UTC+11)
+  "VLI":11,"NOU":11,"HIR":11,"PNI":11,
+  // Гуам, Северные Марианы, Микронезия-Чуук, Папуа НГ (UTC+10)
+  "GUM":10,"SPN":10,"TKK":10,
+  // Палау (UTC+9)
+  "ROR":9,
+  // Самоа независимое (UTC+13)
+  "APW":13,
+  // Тонга (UTC+13)
+  "TBU":13,
+  // Французская Полинезия (UTC-10)
+  "PPT":-10,"BOB":-10,"MOZ":-10,
+};
+
 const MONTHS_RU = {
   JAN:"янв",FEB:"фев",MAR:"мар",APR:"апр",MAY:"май",JUN:"июн",
   JUL:"июл",AUG:"авг",SEP:"сен",OCT:"окт",NOV:"ноя",DEC:"дек"
@@ -341,13 +667,15 @@ function monthRu(mon)      { return MONTHS_RU[(mon||'').toUpperCase()] || mon.to
 // ═══════════════════════════════════════════════════════════════
 
 function calcDuration(seg) {
-  let d = toMins(seg.dep);
-  let a = toMins(seg.arr);
+  const depTZ = TIMEZONES[seg.from] !== undefined ? TIMEZONES[seg.from] : 0;
+  const arrTZ = TIMEZONES[seg.to]   !== undefined ? TIMEZONES[seg.to]   : 0;
+  let depUTC = toMins(seg.dep) - depTZ * 60;
+  let arrUTC = toMins(seg.arr) - arrTZ * 60;
   const dd = parseInt(seg.depDay, 10), ad = parseInt(seg.arrDay, 10);
-  const dm = monthNum(seg.depMon), am = monthNum(seg.arrMon);
-  if (ad > dd || am > dm) a += 1440;
-  else if (a < d) a += 1440;
-  return a - d;
+  const dm = monthNum(seg.depMon),     am = monthNum(seg.arrMon);
+  if (ad > dd || am > dm) arrUTC += 1440;
+  if (arrUTC <= depUTC) arrUTC += 1440;
+  return arrUTC - depUTC;
 }
 
 function calcLayover(s1, s2) {
