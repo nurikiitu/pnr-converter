@@ -592,7 +592,7 @@ const MONTH_NUM = {
 // ЗАГРУЗКА УДАЛЁННОЙ БАЗЫ
 // ═══════════════════════════════════════════════════════════════
 
-const AIRPORTS_URL = "./pnr_db.txt";
+const AIRPORTS_URL = "./pnr_db.txt?v=" + Date.now();
 
 function parseDB(text) {
   let section = 'airports';
@@ -616,7 +616,7 @@ function parseDB(text) {
 
 async function loadAirports() {
   try {
-    const r = await fetch('./pnr_db.txt?v=' + Date.now());
+    const r = await fetch(AIRPORTS_URL);
     const text = await r.text();
     parseDB(text);
   } catch(e) {
