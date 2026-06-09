@@ -616,11 +616,16 @@ function parseDB(text) {
 
 async function loadAirports() {
   try {
+    console.log('Загружаю базу из:', AIRPORTS_URL);
     const r = await fetch(AIRPORTS_URL);
+    console.log('Статус ответа:', r.status, r.ok);
     const text = await r.text();
+    console.log('Размер файла:', text.length, 'символов');
     parseDB(text);
+    console.log('Аэропортов загружено:', Object.keys(AIRPORTS).length);
+    console.log('Авиакомпаний загружено:', Object.keys(AIRLINES).length);
   } catch(e) {
-    console.log('База не загружена:', e);
+    console.error('Ошибка загрузки базы:', e);
   }
 }
 document.addEventListener('DOMContentLoaded', loadAirports);
