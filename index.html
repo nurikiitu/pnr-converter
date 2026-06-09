@@ -274,7 +274,7 @@ const TIMEZONES = {
   // Узбекистан (UTC+5)
   "TAS":5,"SKD":5,"BHK":5,"NVI":5,"NCU":5,"KSQ":5,"TMZ":5,"UGC":5,
   // Кыргызстан (UTC+6)
-  "FRU":6,"BSZ":6,"OSS":6,
+  "FRU":6,"BSZ":6,"OSS":6,"AAT":6,
   // Китай (UTC+8)
   "PEK":8,"PKX":8,"PVG":8,"SHA":8,"CAN":8,"SZX":8,"CTU":8,"CKG":8,
   "XIY":8,"WUH":8,"KMG":8,"HGH":8,"NKG":8,"XMN":8,"TAO":8,"DLC":8,
@@ -671,10 +671,11 @@ function calcDuration(seg) {
   const arrTZ = TIMEZONES[seg.to]   !== undefined ? TIMEZONES[seg.to]   : 0;
   let depUTC = toMins(seg.dep) - depTZ * 60;
   let arrUTC = toMins(seg.arr) - arrTZ * 60;
-  const dd = parseInt(seg.depDay, 10), ad = parseInt(seg.arrDay, 10);
-  const dm = monthNum(seg.depMon),     am = monthNum(seg.arrMon);
-  if (ad > dd || am > dm) arrUTC += 1440;
-  if (arrUTC <= depUTC) arrUTC += 1440;
+  if (seg.nextDay) arrUTC += 1440;
+  if (arrUTC < depUTC) arrUTC += 1440;
+  // Если получилось больше 20 часов и nextDay не указан явно — убрать лишние сутки
+  if (!seg.nextDay && (arrUTC - depUTC) > 1200) arrUTC -= 1440;
+  if (arrUTC < depUTC) arrUTC += 1440;
   return arrUTC - depUTC;
 }
 
@@ -739,7 +740,7 @@ function extractTimes(rest, depDay, depMon) {
     if (dm) { arrDay = dm[1]; arrMon = dm[2].toUpperCase(); }
   }
 
-  return { depTime, arrTime, arrDay, arrMon };
+  return { depTime, arrTime, arrDay, arrMon, nextDay: arrOffset > 0 };
 }
 
 // Регулярки форматов (с номером сегмента)
@@ -758,7 +759,8 @@ function makeSeg(airline, flight, depDay, depMon, from, to, t) {
     depDay, depMon: depMon.toUpperCase(),
     from: from.toUpperCase(), to: to.toUpperCase(),
     dep: t.depTime, arr: t.arrTime,
-    arrDay: t.arrDay, arrMon: t.arrMon
+    arrDay: t.arrDay, arrMon: t.arrMon,
+    nextDay: !!t.nextDay
   };
 }
 
